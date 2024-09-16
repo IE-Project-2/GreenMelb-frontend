@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router
+import './Calc.css';
 
 const CompostRatioCalculator: React.FC = () => {
     const [greens, setGreens] = useState<number | string>('');
@@ -8,6 +10,11 @@ const CompostRatioCalculator: React.FC = () => {
     const [balanceMessage, setBalanceMessage] = useState<string>('');
     const [balanceColor, setBalanceColor] = useState<string>(''); // New state for color coding
     const [error, setError] = useState<string | null>(null);
+
+    const navigate = useNavigate(); // To navigate to the Plant Recommendation page
+    const goToPlantRecommendation = () => {
+        navigate('/PlantRecommendation'); // Adjust the path as needed
+      };
 
     const calculateRatio = (e: React.FormEvent) => {
         e.preventDefault();
@@ -112,6 +119,13 @@ const CompostRatioCalculator: React.FC = () => {
                 <p style={{ fontSize: '16px' }}><strong>Browns:</strong> Carbon-rich materials like dry leaves, straw, and cardboard. They are dry and high in fiber.</p>
                 <p style={{ fontSize: '16px' }}>Balance is key: aim for 2-3 parts browns to 1 part greens for optimal composting.</p>
             </motion.div>
+
+            <button className="scrollButton" onClick={goToPlantRecommendation}>
+                Go to Plant Recommendation
+            </button>
+
+
+              
         </div>
     );
 };
