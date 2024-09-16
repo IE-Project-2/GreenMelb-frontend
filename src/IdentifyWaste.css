@@ -18,6 +18,7 @@
   margin-bottom: 20px;
 }
 
+
 .drop-zone {
   display: flex;
   flex-direction: column;
@@ -224,4 +225,34 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.full-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.identify-waste-content {
+  flex: 1; /* Make the content section grow and push the footer down */
+  padding: 20px;
+}
+
+
+.map-button, .guide-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.map-button:hover, .guide-button:hover {
+  background-color: #45a049;
+}
+
+.guide-button {
+  margin-left: 10px; /* Add some space between the two buttons */
 }

@@ -1,0 +1,104 @@
+.full-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    padding: 20px 0;
+}
+
+.waste-prediction-container {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.explanation {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    line-height: 1.6;
+    color: #555;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    width: 48%;
+    margin-bottom: 20px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-button {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.form-button:hover {
+    background-color: #45a049;
+}
+
+.prediction-result {
+    margin-top: 30px;
+}
+
+.total-waste {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: 1000px; /* Increase height of the graph for better visibility */
+    margin: 0 auto;
+}
+
+
+footer {
+    flex-shrink: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.hover-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+}

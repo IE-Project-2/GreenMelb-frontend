@@ -1,30 +1,31 @@
 import React from "react";
-//import './Header.css';
-import "./GlobalStyles.css";
+import { Link } from "react-router-dom";
+import "./GlobalStyles.css"; // Assuming this file exists for global styles
+import "./Header.css"; // New CSS file for header styles
 
 const Header: React.FC = () => {
   return (
-    <header>
-      <h1>Green Melb</h1>
+    <header className="main-header">
+      <div className="logo">
+        <Link to="/">
+          {/* Logo image next to text */}
+          <img src="/images/logo.jpeg" alt="Green Melb Logo" className="logo-image" />
+          Green Melb
+        </Link>
+      </div>
       <nav>
-        <ul>
+        <ul className="nav-links">
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/IdentifyWaste">Identify waste </a>
+            <Link to="/IdentifyWaste">Identify waste</Link>
           </li>
           <li>
-            <a href="/MapPage">Recycling centers </a>
+            <Link to="/MapPage">Recycling centers</Link>
           </li>
           <li>
-            <a href="/OrganicWaste">Organic waste</a>
-          </li>
-          <li>
-            <a href="/Recyclable">Recyclable</a>
-          </li>
-          <li>
-            <a href="/achievements">Your achievements</a>
+            <Link to="/CompostingGuide">Composting Guide</Link>
           </li>
         </ul>
       </nav>
