@@ -50,8 +50,20 @@ const GreenMelbLandingPage: React.FC = () => {
         <ParallaxLayer
     offset={1}
     speed={1}
-    style={{ backgroundColor: '#98FF98', zIndex: 3,position: 'relative' }}
-  />
+    style={{ backgroundColor: '#ffa700', zIndex: 3,position: 'relative' }}>
+    <div className={styles.headerContainer} style={{ zIndex: 3 }}>
+      <h1 className='slider-text'>Be a part of the solution today</h1>
+      <div className="steps-container" style={{ zIndex: 9 }}>
+        <a href="#step1" className="step">Over 40,000 Tons of waste generated per year</a>
+        <a href="#step2" className="step">75% ends up in landfills</a>
+        <a href="#step3" className="step">Major landfills projected to reach capacity by 2030</a>
+        <a href="#step4" className="step">Up to 30% of recycling bins contain non-recyclables</a>
+      </div>       
+          </div>
+  
+  </ParallaxLayer>
+
+
   <ParallaxLayer
     offset={2}
     speed={1}
@@ -78,9 +90,9 @@ const GreenMelbLandingPage: React.FC = () => {
         
         {/* Custom cloud images */}
         <ParallaxLayer offset={1} speed={-0.8} style={{ opacity: 0.9 , zIndex: 3}}>
-          <img src={images.pizza} style={{ display: 'block', width: '20%', marginLeft: '75%' }} className="rotate-15" />
-          <img src={images.battery} style={{ display: 'block', width: '10%', marginLeft: '15%' }} className="rotate-45" />
-          <img src={images.bash} style={{ display: 'block', width: '5%', marginLeft: '25%' }} />
+          <img src={images.pizza} style={{ display: 'block', width: '20%', marginLeft: '90%' }} className="rotate-15" />
+          <img src={images.battery} style={{ display: 'block', width: '10%', marginLeft: '5%' }} className="rotate-45" />
+          <img src={images.bash} style={{ display: 'block', width: '5%', marginLeft: '15%' }} />
           <img src={images.banana} style={{ display: 'block', width: '5%', marginLeft: '5%' }} />
         </ParallaxLayer>
 
@@ -111,7 +123,7 @@ const GreenMelbLandingPage: React.FC = () => {
         </ParallaxLayer>
 
 
-        <ParallaxLayer sticky={{ start: 0.5, end: 0.2 }} speed={2}>
+        <ParallaxLayer sticky={{ start: 0.5, end: 0.3}} speed={2}>
   <div className={styles.headerContainer}>
     <p className="scrollText">Scroll to learn more</p>
   </div>

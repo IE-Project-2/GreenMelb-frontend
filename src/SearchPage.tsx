@@ -80,7 +80,7 @@ const SearchPage: React.FC = () => {
       </div>
 
       <div className="search-bar">
-        <h2>Enter Your 4-Digit Postcode:</h2>
+        <h2>Enter Your Postcode:</h2>
         <div className="postcode-inputs">
           {postcode.map((value, index) => (
             <input
