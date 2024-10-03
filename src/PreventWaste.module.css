@@ -1,0 +1,50 @@
+.container {
+  font-family: monospace;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.heading {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.parallax-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create two columns */
+  gap: 15px; /* Space between boxes */
+  margin-bottom: 30px;
+}
+
+.tip-box {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+
+.tip-box h3 {
+  font-size: 2rem; /* Make headers bigger */
+  margin-bottom: 10px; /* Add space below header */
+}
+
+.dropdown-label {
+  font-size: 1.2rem;
+  font-family: monospace;
+  margin-right: 10px;
+}
+
+.fact-output {
+  margin-top: 20px;
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}

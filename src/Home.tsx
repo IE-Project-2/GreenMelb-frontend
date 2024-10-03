@@ -123,11 +123,23 @@ const GreenMelbLandingPage: React.FC = () => {
         </ParallaxLayer>
 
 
-        <ParallaxLayer sticky={{ start: 0.5, end: 0.3}} speed={2}>
-  <div className={styles.headerContainer}>
-    <p className="scrollText">Scroll to learn more</p>
+        <ParallaxLayer sticky={{ start: 0.35, end: 2.5 }} speed={2} style={{ zIndex: 2 }}>
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'flex-end', 
+      alignItems: 'center',       
+      height: '100vh',            
+      paddingRight: '20px',
+      fontFamily: 'monospace', 
+      fontSize: '1.5rem', 
+      fontWeight: 'bolder', 
+    }}
+  >
+    <p style={{ marginRight: '20px' }}>Scroll to learn more</p>
   </div>
 </ParallaxLayer>
+
 
         
 
