@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { jsPDF } from 'jspdf';
 import styles from './PreventWaste.module.css';
 
 const PreventWaste: React.FC = () => {
@@ -12,6 +13,19 @@ const PreventWaste: React.FC = () => {
   // Error state
   const [error, setError] = useState<string | null>(null);
 
+  // Handler for input changes
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<number | null>>, maxLimit: number) => {
+    const value = event.target.value;
+    const validationError = validateInput(value, maxLimit);
+    
+    setError(validationError); // Set error if any
+    if (!validationError) {
+      setter(parseInt(value, 10));
+    } else {
+      setter(null); // Reset state if invalid
+    }
+  };
+
   // Validation function
   const validateInput = (value: string, maxLimit: number) => {
     const parsedValue = parseInt(value, 10);
@@ -22,81 +36,118 @@ const PreventWaste: React.FC = () => {
     return null;
   };
 
-  // Handler for input changes
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setFunction: React.Dispatch<React.SetStateAction<number | null>>,
-    maxLimit: number
-  ) => {
-    const value = event.target.value;
-    const validationError = validateInput(value, maxLimit);
-    setError(validationError);
-    if (!validationError) {
-      setFunction(parseInt(value, 10) || null);
-    } else {
-      setFunction(null);
-    }
-  };
-
-  // Generate output message
+  // Generate contribution messages
   const generateMessage = () => {
-    let message = 'Here is your contribution summary:\n';
-
+    const contributions: string[] = [];
+  
     if (plasticBags) {
-      message += `- Saving ${plasticBags} plastic bags per month could reduce carbon emissions by ${(plasticBags * 0.1).toFixed(2)} kg.\n`;
+      contributions.push(
+        `Saving ${plasticBags} plastic bags could reduce carbon emissions by ${(plasticBags * 0.1).toFixed(2)} kg.\nTip: Reuse plastic bags or switch to reusable bags to minimize plastic waste.`
+      );
     }
-
+  
     if (organicWaste) {
-      message += `- Reducing ${organicWaste} kg of organic waste per month could save ${organicWaste * 1.5} kg of methane emissions.\n`;
+      contributions.push(
+        `Reducing ${organicWaste} kg of organic waste could save ${organicWaste * 1.5} kg of methane emissions.\nTip: Compost food scraps and yard waste to create nutrient-rich soil.`
+      );
     }
-
+  
     if (paperWaste) {
-      message += `- Saving ${paperWaste} sheets of paper per month could save ${paperWaste * 0.05} trees.\n`;
+      // Limit the number of trees saved to a more manageable number
+      const treesSaved = (paperWaste * 0.05).toFixed(2);
+      contributions.push(
+        `Saving ${paperWaste} sheets of paper could save ${treesSaved} trees.\nTip: Opt for digital documents and use both sides of the paper when printing.`
+      );
     }
-
+  
     if (glassBottles) {
-      message += `- Recycling ${glassBottles} glass bottles per month could save ${glassBottles * 0.3} kg of CO2 emissions.\n`;
+      contributions.push(
+        `Recycling ${glassBottles} glass bottles could save ${(glassBottles * 0.3).toFixed(2)} kg of CO2 emissions.\nTip: Rinse glass bottles before recycling to ensure they are clean.`
+      );
     }
-
+  
     if (aluminumCans) {
-      message += `- Recycling ${aluminumCans} aluminum cans per month could save enough energy to power a TV for ${(aluminumCans * 3).toFixed(2)} hours.\n`;
+      contributions.push(
+        `Recycling ${aluminumCans} aluminum cans could save enough energy to power a TV for ${(aluminumCans * 3).toFixed(2)} hours.\nTip: Flatten aluminum cans before recycling to save space in your bin.`
+      );
     }
-
-    return message;
+  
+    return contributions;
   };
+  
+
+  const handleGeneratePDF = () => {
+    const doc = new jsPDF();
+    
+    // Add logo at the top
+    const logo = new Image();
+    logo.src = 'path/to/your/logo.png'; // Ensure you provide the correct path to your logo
+    logo.onload = () => {
+      doc.addImage(logo, 'PNG', 14, 10, 50, 20); // Adjust position and size as needed
+    };
+    
+    // Title
+    doc.setFontSize(24);
+    doc.setFont('Courier', 'bold');
+    doc.setTextColor(0, 51, 102); // Dark Blue
+    doc.text('GreenMelb', 14, 40);
+    
+    // Add a thank you message
+    doc.setFontSize(16);
+    doc.setFont('Courier', 'normal');
+    doc.setTextColor(0, 102, 204); // Medium Blue
+    doc.text('Thank you for making Melbourne a cleaner city!', 14, 60);
+    
+    // General Tips Header
+    doc.setFontSize(18);
+    doc.setTextColor(0, 153, 51); // Dark Green
+    doc.text('General Tips:', 14, 80);
+    
+    const tips = [
+      '1. Always recycle your plastic, glass, and paper.',
+      '2. Reduce food waste by planning meals.',
+      '3. Use reusable bags when shopping.',
+      '4. Participate in local clean-up events.',
+      '5. Spread the word about recycling programs.'
+    ];
+    
+    tips.forEach((tip, index) => {
+      doc.setFontSize(14);
+      doc.setTextColor(0, 0, 0); // Black for tips
+      doc.text(tip, 14, 95 + (index * 10)); // Adjust the Y position for each tip
+    });
+    
+    // Set Goals Header
+    doc.setFontSize(18);
+    doc.setTextColor(255, 102, 102); // Light Red
+    doc.text('Your Goals:', 14, 130); // Adjusted Y position
+    
+    const contributions = generateMessage();
+    
+    contributions.forEach((contribution, index) => {
+      doc.setFontSize(14);
+      doc.setTextColor(0, 0, 0); // Black for goals
+      doc.text(`Goal ${index + 1}:`, 14, 145 + (index * 30)); // More space for clarity
+      doc.setFontSize(12);
+      doc.setTextColor(50, 50, 50); // Dark Gray for subtext
+  
+      // Modify contribution text to limit decimals and prevent overlapping
+      const contributionText = contribution.replace(/(\d+\.\d{2})\d+/g, '$1'); // Limit decimals to 2
+      doc.text(contributionText, 14, 155 + (index * 30)); // Adjust the Y position for subtext
+    });
+  
+    // Save the document
+    doc.save('clean_melbourne_poster.pdf');
+  };
+  
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Prevent Waste at Home</h1>
-
-      {/* Interactive Tips Section */}
-      <div className={styles['parallax-section']}>
-        <div className={styles['tip-box']} style={{ backgroundColor: '#ffefb6' }}>
-          <h3>Tip 1: Reuse Containers</h3>
-          <p>Store food in reusable containers rather than single-use plastics to reduce waste.</p>
-        </div>
-        <div className={styles['tip-box']} style={{ backgroundColor: '#b6ffee' }}>
-          <h3>Tip 2: Compost Organic Waste</h3>
-          <p>Compost food scraps to divert waste from landfills and reduce methane emissions.</p>
-        </div>
-        <div className={styles['tip-box']} style={{ backgroundColor: '#ffd4b6' }}>
-          <h3>Tip 3: Avoid Excess Packaging</h3>
-          <p>Buy products with minimal packaging and recycle whenever possible.</p>
-        </div>
-        <div className={styles['tip-box']} style={{ backgroundColor: '#c4ffb6' }}>
-          <h3>Tip 4: Use Energy Efficient Appliances</h3>
-          <p>Switch to energy-efficient appliances to save electricity and reduce your carbon footprint.</p>
-        </div>
-      </div>
-      <div className={styles.container}>
-      <h1 className={styles.heading}>Let's set a goal!</h1>
-      </div>
+      <h1 className={styles.heading}>Prevent Waste at Home. Let's set a goal!</h1>
 
       {/* Input Fields */}
       <div>
-        <label className={styles['dropdown-label']} htmlFor="plastic-bags">
-          I will save:
-        </label>
+        <label htmlFor="plastic-bags">I will save:</label>
         <input
           id="plastic-bags"
           type="number"
@@ -106,9 +157,7 @@ const PreventWaste: React.FC = () => {
       </div>
 
       <div>
-        <label className={styles['dropdown-label']} htmlFor="organic-waste">
-          I will reduce:
-        </label>
+        <label htmlFor="organic-waste">I will reduce:</label>
         <input
           id="organic-waste"
           type="number"
@@ -118,9 +167,7 @@ const PreventWaste: React.FC = () => {
       </div>
 
       <div>
-        <label className={styles['dropdown-label']} htmlFor="paper-waste">
-          I will save:
-        </label>
+        <label htmlFor="paper-waste">I will save:</label>
         <input
           id="paper-waste"
           type="number"
@@ -130,9 +177,7 @@ const PreventWaste: React.FC = () => {
       </div>
 
       <div>
-        <label className={styles['dropdown-label']} htmlFor="glass-bottles">
-          I will recycle:
-        </label>
+        <label htmlFor="glass-bottles">I will recycle:</label>
         <input
           id="glass-bottles"
           type="number"
@@ -142,9 +187,7 @@ const PreventWaste: React.FC = () => {
       </div>
 
       <div>
-        <label className={styles['dropdown-label']} htmlFor="aluminum-cans">
-          I will recycle:
-        </label>
+        <label htmlFor="aluminum-cans">I will recycle:</label>
         <input
           id="aluminum-cans"
           type="number"
@@ -156,11 +199,18 @@ const PreventWaste: React.FC = () => {
       {/* Display error message */}
       {error && <p className={styles.error}>{error}</p>}
 
-      {/* Output the message if at least one input has been entered */}
-      {(plasticBags || organicWaste || paperWaste || glassBottles || aluminumCans) && !error && (
+      {/* Output the messages if at least one input has been entered */}
+      {(!error && (plasticBags || organicWaste || paperWaste || glassBottles || aluminumCans)) && (
         <div className={styles['fact-output']}>
           <h2>Your Contribution:</h2>
-          <pre>{generateMessage()}</pre>
+          <div className={styles['contribution-boxes']}>
+            {generateMessage().map((message, index) => (
+              <div key={index} className={`${styles.box} ${styles[`color-${index}`]}`}>
+                <pre>{message}</pre>
+              </div>
+            ))}
+          </div>
+          <button onClick={handleGeneratePDF} className={styles['action-button']}>Take Action</button>
         </div>
       )}
     </div>

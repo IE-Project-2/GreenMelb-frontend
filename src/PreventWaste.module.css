@@ -1,50 +1,98 @@
 .container {
-  font-family: monospace;
-  font-weight: bold;
   padding: 20px;
+  font-size: 1.2rem;
 }
 
 .heading {
   font-size: 2rem;
-  text-align: center;
-}
-
-.parallax-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Create two columns */
-  gap: 15px; /* Space between boxes */
-  margin-bottom: 30px;
-}
-
-.tip-box {
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  font-family: monospace;
-  font-size: 1.2rem;
-}
-
-.tip-box h3 {
-  font-size: 2rem; /* Make headers bigger */
-  margin-bottom: 10px; /* Add space below header */
-}
-
-.dropdown-label {
-  font-size: 1.2rem;
-  font-family: monospace;
-  margin-right: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .fact-output {
   margin-top: 20px;
-  font-family: monospace;
+}
+
+.fact-output h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.input-field {
   font-size: 1.5rem;
-  color: #333;
-  text-align: center;
+  padding: 15px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-label {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.contribution-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.box {
+  flex: 1 0 calc(33.33% - 10px);
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.box-header {
+  font-size: 2rem; /* Increased size for box headers */
+  font-weight: bold; /* Bolder text */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font */
+  margin-bottom: 10px; /* Space below the header */
+}
+
+.stat-number {
+  color: red; /* Red color for the stat number */
+  font-size: 1.8rem; /* Slightly larger size for the stat number */
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+.color-0 {
+  background-color: #add8e6;
+}
+
+.color-1 {
+  background-color: #90ee90;
+}
+
+.color-2 {
+  background-color: #ffcccb;
+}
+
+.color-3 {
+  background-color: #fffacd;
+}
+
+.color-4 {
+  background-color: #dda0dd;
 }
 
 .error {
   color: red;
-  font-size: 1.2rem;
   margin-top: 10px;
+}
+
+.action-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
