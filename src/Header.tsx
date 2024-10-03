@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./GlobalStyles.css"; // Assuming this file exists for global styles
 import "./Header.css"; // New CSS file for header styles
 
 const Header: React.FC = () => {
@@ -26,6 +25,15 @@ const Header: React.FC = () => {
           </li>
           <li>
             <Link to="/CompostingGuide">Composting Guide</Link>
+          </li>
+          <li>
+            <Link to="/CompostingTips">Composting Tips</Link>
+          </li>
+          <li>
+            <Link to="/achievements">Your achievements</Link>
+          </li>
+          <li>
+            <Link to="/PlantRecommendation">Plant Recommendation</Link>
           </li>
         </ul>
       </nav>
