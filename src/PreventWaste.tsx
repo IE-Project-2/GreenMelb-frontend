@@ -81,26 +81,20 @@ const PreventWaste: React.FC = () => {
     
     // Add logo at the top
     const logo = new Image();
-    logo.src = 'path/to/your/logo.png'; // Ensure you provide the correct path to your logo
+    logo.src = '/images/logo.jpg'; 
     logo.onload = () => {
-      doc.addImage(logo, 'PNG', 14, 10, 50, 20); // Adjust position and size as needed
+      doc.addImage(logo, 'PNG', 14, 10, 50, 20); 
     };
     
-    // Title
+    
     doc.setFontSize(24);
     doc.setFont('Courier', 'bold');
-    doc.setTextColor(0, 51, 102); // Dark Blue
-    doc.text('GreenMelb', 14, 40);
-    
-    // Add a thank you message
-    doc.setFontSize(16);
-    doc.setFont('Courier', 'normal');
-    doc.setTextColor(0, 102, 204); // Medium Blue
-    doc.text('Thank you for making Melbourne a cleaner city!', 14, 60);
+    doc.setTextColor(0, 51, 102); 
+    doc.text('GreenMelb.com', 14, 40);
     
     // General Tips Header
     doc.setFontSize(18);
-    doc.setTextColor(0, 153, 51); // Dark Green
+    doc.setTextColor(0, 153, 51);
     doc.text('General Tips:', 14, 80);
     
     const tips = [
@@ -117,23 +111,25 @@ const PreventWaste: React.FC = () => {
       doc.text(tip, 14, 95 + (index * 10)); // Adjust the Y position for each tip
     });
     
-    // Set Goals Header
-    doc.setFontSize(18);
-    doc.setTextColor(255, 102, 102); // Light Red
-    doc.text('Your Goals:', 14, 130); // Adjusted Y position
-    
+
     const contributions = generateMessage();
     
     contributions.forEach((contribution, index) => {
       doc.setFontSize(14);
       doc.setTextColor(0, 0, 0); // Black for goals
-      doc.text(`Goal ${index + 1}:`, 14, 145 + (index * 30)); // More space for clarity
+      doc.text(`Goal ${index + 1}:`, 14, 145 + (index * 30)); 
       doc.setFontSize(12);
       doc.setTextColor(50, 50, 50); // Dark Gray for subtext
   
       // Modify contribution text to limit decimals and prevent overlapping
-      const contributionText = contribution.replace(/(\d+\.\d{2})\d+/g, '$1'); // Limit decimals to 2
-      doc.text(contributionText, 14, 155 + (index * 30)); // Adjust the Y position for subtext
+      const contributionText = contribution.replace(/(\d+\.\d{2})\d+/g, '$1'); 
+      doc.text(contributionText, 14, 155 + (index * 30)); 
+
+       // Add a thank you message
+    doc.setFontSize(16);
+    doc.setFont('Courier', 'normal');
+    doc.setTextColor(0, 102, 204); // Medium Blue
+    doc.text('Thank you for making Melbourne a cleaner city!', 14, 60);
     });
   
     // Save the document
