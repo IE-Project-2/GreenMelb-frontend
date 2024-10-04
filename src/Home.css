@@ -1,11 +1,17 @@
+/* Reset margins for body */
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
 /* Container styles */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
+  justify-content: flex-start; /* Align items to the top */
   align-items: center; /* Center horizontally */
   height: 100vh; /* Full viewport height */
-  padding: 0 px; /* Optional padding for smaller screens */
+  padding: 0; /* No padding to prevent extra space */
 }
 
 /* Style for the main heading */
@@ -15,7 +21,7 @@
   color: #070606; 
   margin: 0; /* Remove default margin */
   text-align: center; /* Center text horizontally */
-  
+  padding-top: 140px;
 }
 
 /* Style for the call-to-action button */
@@ -29,18 +35,15 @@
   border-radius: 5px; 
   cursor: pointer; 
   transition: background-color 0.3s ease; 
-  margin-top: 20px;
+  margin-top: 20px; /* Space below the button */
   pointer-events: auto;
-  position: relative;
- 
-  
 }
 
 .cta-button:hover {
   background-color: #40dd19; 
 }
 
-/* Cursor dot animation styling (if needed) */
+/* Cursor dot animation styling */
 .cursor-dot {
   position: absolute;
   width: 30px;
@@ -52,60 +55,57 @@
   z-index: 9999; /* Keep the cursor dot on top of other elements */
 }
 
-.info-text{
-    font-family: monospace;
-    font-size: 2rem;
-    
+.info-text {
+  font-family: monospace;
+  font-size: 2rem;
 }
 
-.slider-text{
-    font-family: monospace;
-    font-size: 5rem;
-    color: #fff;
-    padding: 5%;
+.slider-text {
+  font-family: monospace;
+  font-size: 5rem;
+  color: #fff;
+  padding: 5%;
 }
-.slider-text-small{
-    font-family: monospace;
-    font-size: 1.5rem;
-    color: #fff;
-    padding: 5%;
+
+.slider-text-small {
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: #fff;
+  padding: 5%;
 }
 
 .steps-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between each step */
-    padding: 20px; /* Padding around the container */
-    max-width: 800px; /* Limit width to prevent text from stretching too wide */
-    margin: 0 auto; /* Center container horizontally */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between each step */
+  padding: 20px; /* Padding around the container */
+  max-width: 800px; /* Limit width to prevent text from stretching too wide */
+  margin: 0 auto; /* Center container horizontally */
+}
+
+.step {
+  font-size: 1.5rem; /* Font size for the step text */
+  font-weight: bold; /* Make the text bold */
+  background: #f9f9f9; /* Light background color */
+  color: #333; /* Dark text color */
+  padding: 15px; /* Padding inside each step */
+  border-left: 6px solid gold; /* Gold border on the left */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  text-decoration: none; /* Remove underline from links */
+  display: block; /* Make the entire link clickable */
+}
+
+.step:hover {
+  background-color: #eaf7e0; /* Slightly different background color on hover */
+  transform: translateY(-3px); /* Lift effect on hover */
+}
+
+/* Optional: Responsive design */
+@media (max-width: 600px) {
   .step {
-    font-size: 1.5rem; /* Font size for the step text */
-    font-weight: bold; /* Make the text bold */
-    background: #f9f9f9; /* Light background color */
-    color: #333; /* Dark text color */
-    padding: 15px; /* Padding inside each step */
-    border-left: 6px solid gold; /* Gold border on the left */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-    text-decoration: none; /* Remove underline from links */
-    display: block; /* Make the entire link clickable */
+    font-size: 1.2rem; /* Slightly smaller font size on small screens */
+    padding: 10px; /* Reduced padding */
   }
-  
-  .step:hover {
-    background-color: #eaf7e0; /* Slightly different background color on hover */
-    transform: translateY(-3px); /* Lift effect on hover */
-  }
-  
-  /* Optional: Responsive design */
-  @media (max-width: 600px) {
-    .step {
-      font-size: 1.2rem; /* Slightly smaller font size on small screens */
-      padding: 10px; /* Reduced padding */
-    }
-  }
-  
-  
-  
+}

@@ -6,6 +6,7 @@ import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
 import './Achievements.css';
 import styles from './styles.module.css'; 
 import Footer from './Footer.tsx';
+import Header from './Header.tsx'
 
 const images = {
     background: "/images/background.jpuyG", //change later to jpg
@@ -33,13 +34,15 @@ const GreenMelbLandingPage: React.FC = () => {
 
   return (
     <div className="container">
+            <Header />
+
       <h1 className="main-heading">GreenMelb</h1>
       <p className="info-text"style={{ zIndex: 0,position: 'relative' }} >Manage waste. Right from your Home.</p>
       
       <button
   className="cta-button"
   onClick={() => navigateToPage('/IdentifyWaste')}
-  style={{ zIndex: 0,position: 'relative' }} 
+  style={{ zIndex: 4,position: 'relative' }} 
 >
   Get Started
 </button>
@@ -124,20 +127,37 @@ const GreenMelbLandingPage: React.FC = () => {
 
 
         <ParallaxLayer sticky={{ start: 0.35, end: 2.5 }} speed={2} style={{ zIndex: 2 }}>
-  <div
-    style={{
-      display: 'flex',
-      justifyContent: 'flex-end', 
-      alignItems: 'center',       
-      height: '100vh',            
-      paddingRight: '20px',
-      fontFamily: 'monospace', 
-      fontSize: '1.5rem', 
-      fontWeight: 'bolder', 
-    }}
-  >
-    <p style={{ marginRight: '20px' }}>Scroll to learn more</p>
-  </div>
+        <div
+  style={{
+    display: 'flex',
+    flexDirection: 'column', // Stack the image on top of the text
+    justifyContent: 'center', // Center vertically
+    alignItems: 'flex-end',   // Align both image and text to the right
+    height: '100vh',            
+    paddingRight: '20px',     // Space from the right side of the screen
+    fontFamily: 'monospace', 
+    fontSize: '1.5rem', 
+    fontWeight: 'bolder',
+    textAlign: 'right',       // Align text to the right
+  }}
+>
+  {/* Scroll Image */}
+  <img 
+    src="/images/scroll.png" // Replace with the actual URL of the image
+    alt="Scroll down"
+    style={{ 
+      width: '150px', // Adjust size
+      height: 'auto',
+      marginBottom: '-30px', // Space between image and text
+      paddingRight: '5%'
+    }} 
+  />
+
+  {/* Scroll Text */}
+  <p style={{ marginRight: '20px' }}>Scroll to learn more</p>
+</div>
+
+
 </ParallaxLayer>
 
 
