@@ -1,0 +1,185 @@
+.quiz-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #253237;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main container for the quiz */
+.quiz-container {
+  z-index: 10;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: monospace;
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Card container for the quiz question and options */
+.quiz-card {
+  padding: 20px;
+}
+
+/* Results container for the quiz feedback */
+.results {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Options styling */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Option button styling */
+.option-btn {
+  padding: 10px;
+  font-size: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.option-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Progress bar styling */
+.progress {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Styling for the result feedback text */
+.results h2 {
+  font-size: 2rem;
+  color: #28a745;
+}
+
+.results p {
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+/* Floating waste-related images */
+.floating-image {
+  position: absolute;
+  opacity: 0.8;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Floating image positions */
+.bottle {
+  top: 10%;
+  left: 75%;
+  width: 10%;
+  animation-delay: 0s;
+}
+
+.banana {
+  top: 20%;
+  left: 10%;
+  width: 8%;
+  animation-delay: 2s;
+}
+
+.can {
+  bottom: 15%;
+  left: 50%;
+  width: 12%;
+  animation-delay: 4s;
+}
+
+.battery {
+  top: 50%;
+  right: 20%;
+  width: 10%;
+  animation-delay: 3s;
+}
+
+.plasticBag {
+  bottom: 10%;
+  right: 5%;
+  width: 12%;
+  animation-delay: 1s;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Feedback message styling */
+.feedback-message {
+  font-size: 1.5rem;
+  color: #343a40;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  .quiz-page {
+    padding-left: 15px;  /* Add padding on the left */
+    padding-right: 15px; /* Add padding on the right */
+  }
+
+  .quiz-container {
+    padding: 15px;
+    max-width: 100%; /* Ensure full width on smaller screens */
+  }
+
+  .quiz-card, .results {
+    padding: 15px; /* Reduce padding for mobile */
+  }
+
+  .quiz-container {
+    font-size: 1.5rem; /* Reduce the font size for mobile screens */
+  }
+
+  .option-btn {
+    font-size: 1.2rem; /* Reduce font size for buttons on mobile */
+    padding: 8px 16px; /* Reduce padding for buttons */
+  }
+
+  .progress {
+    font-size: 1rem; /* Reduce font size for progress text */
+  }
+
+  .results h2 {
+    font-size: 1.8rem; /* Slightly smaller header for mobile */
+  }
+
+  .results p, .feedback-message {
+    font-size: 1.2rem; /* Smaller text size for feedback */
+  }
+
+  /* Adjust floating images for mobile */
+  .bottle, .banana, .can, .battery, .plasticBag {
+    width: 8%; /* Make floating images smaller */
+  }
+}

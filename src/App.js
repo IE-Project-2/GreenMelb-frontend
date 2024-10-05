@@ -11,6 +11,9 @@ import CompostRatioCalculator from "./CompostRatioCalculator.tsx";
 import CompostingTips from "./CompostingTips.tsx";
 import WastePrediction from './WastePrediction.tsx';
 import SearchPage from "./SearchPage.tsx";
+import Camera from "./Camera.tsx"; // Import the Camera component
+import Quiz from "./QuizPage.tsx";
+
 export default function App() {
   return (
       <div className="App">
@@ -28,6 +31,8 @@ export default function App() {
             <Route path="/CompostingTips" element = {<CompostingTips />} />
             
             <Route path="/WastePrediction" element = {<WastePrediction />} />
+            <Route path="/Camera" element={<Camera />} />
+            <Route path="/Quiz" element={<Quiz/>}/>
             <Route path="/SearchPage" element = {<SearchPage />} />
           
            
