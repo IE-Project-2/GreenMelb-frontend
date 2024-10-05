@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { jsPDF } from 'jspdf';
 import styles from './PreventWaste.module.css';
+import Header from './Header.tsx';
 
 const PreventWaste: React.FC = () => {
   // State for inputs
@@ -139,6 +140,7 @@ const PreventWaste: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <h1 className={styles.heading}>Prevent Waste at Home. Let's set a goal!</h1>
 
       {/* Input Fields */}

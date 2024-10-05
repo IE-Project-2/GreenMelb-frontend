@@ -112,6 +112,7 @@ export default function CompostingTips() {
           <CompostRatioCalculator />  {/* Calculator component */}
         </ParallaxLayer>
         
+        
       </Parallax>
     </div>
   );

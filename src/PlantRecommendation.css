@@ -16,9 +16,9 @@
 
 /* Title styling */
 .title {
-  font-family: 'Monospace', sans-serif;
-  font-size: 3rem;
-  font-weight: bolder;
+  font-size: 6rem;
+  margin-bottom: 20px;
+  font-family: monospace;
   color: #333;
   margin-bottom: 30px;
 }
@@ -41,12 +41,14 @@
 }
 
 .labelText {
+  font-family: monospace;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-right: 10px;
 }
 
 .dropdown {
+  font-family: monospace;
   width: 100%;
   padding: 10px;
   font-size: 1rem;
@@ -61,6 +63,7 @@
 }
 
 .getRecommendationButton {
+  font-family: monospace;
   padding: 15px 30px;
   background-color: #28a745;
   color: white;
@@ -78,6 +81,7 @@
 
 /* Error message styling */
 .error {
+  font-family: monospace;
   color: red;
   margin-top: 20px;
   font-size: 1.2rem;
@@ -93,6 +97,7 @@
 
 /* Box styling for the plant details */
 .plantBox {
+  font-family: monospace;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -105,6 +110,7 @@
 
 /* Styling for plant names */
 .plantName {
+  font-family: monospace;
   font-size: 1.5em;
   font-weight: bold;
   margin: 10px 0;
