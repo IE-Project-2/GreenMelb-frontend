@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { jsPDF } from 'jspdf';
 import styles from './PreventWaste.module.css';
 import Header from './Header.tsx';
+import Footer from './Footer.tsx';
 
 const PreventWaste: React.FC = () => {
   // State for inputs
@@ -145,54 +146,60 @@ const PreventWaste: React.FC = () => {
 
       {/* Input Fields */}
       <div>
-        <label htmlFor="plastic-bags">I will save:</label>
-        <input
-          id="plastic-bags"
-          type="number"
-          placeholder="Plastic bags per month (Max 100)"
-          onChange={(e) => handleInputChange(e, setPlasticBags, 100)}
-        />
-      </div>
+  <label htmlFor="plastic-bags">I will save:</label>
+  <input
+    id="plastic-bags"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Plastic bags per month (Max 100)"
+    onChange={(e) => handleInputChange(e, setPlasticBags, 100)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="organic-waste">I will reduce:</label>
-        <input
-          id="organic-waste"
-          type="number"
-          placeholder="Kg of organic waste per month (Max 500)"
-          onChange={(e) => handleInputChange(e, setOrganicWaste, 500)}
-        />
-      </div>
+<div>
+  <label htmlFor="organic-waste">I will reduce:</label>
+  <input
+    id="organic-waste"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Kg of organic waste per month (Max 500)"
+    onChange={(e) => handleInputChange(e, setOrganicWaste, 500)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="paper-waste">I will save:</label>
-        <input
-          id="paper-waste"
-          type="number"
-          placeholder="Sheets of paper per month (Max 1000)"
-          onChange={(e) => handleInputChange(e, setPaperWaste, 1000)}
-        />
-      </div>
+<div>
+  <label htmlFor="paper-waste">I will save:</label>
+  <input
+    id="paper-waste"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Sheets of paper per month (Max 1000)"
+    onChange={(e) => handleInputChange(e, setPaperWaste, 1000)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="glass-bottles">I will recycle:</label>
-        <input
-          id="glass-bottles"
-          type="number"
-          placeholder="Glass bottles per month (Max 500)"
-          onChange={(e) => handleInputChange(e, setGlassBottles, 500)}
-        />
-      </div>
+<div>
+  <label htmlFor="glass-bottles">I will recycle:</label>
+  <input
+    id="glass-bottles"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Glass bottles per month (Max 500)"
+    onChange={(e) => handleInputChange(e, setGlassBottles, 500)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="aluminum-cans">I will recycle:</label>
-        <input
-          id="aluminum-cans"
-          type="number"
-          placeholder="Aluminum cans per month (Max 1000)"
-          onChange={(e) => handleInputChange(e, setAluminumCans, 1000)}
-        />
-      </div>
+<div>
+  <label htmlFor="aluminum-cans">I will recycle:</label>
+  <input
+    id="aluminum-cans"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Aluminum cans per month (Max 1000)"
+    onChange={(e) => handleInputChange(e, setAluminumCans, 1000)}
+  />
+</div>
+
 
       {/* Display error message */}
       {error && <p className={styles.error}>{error}</p>}
@@ -211,6 +218,7 @@ const PreventWaste: React.FC = () => {
           <button onClick={handleGeneratePDF} className={styles['action-button']}>Take Action</button>
         </div>
       )}
+    
     </div>
   );
 };

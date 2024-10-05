@@ -3,6 +3,7 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import styles from './styles.module.css'; 
 import CompostRatioCalculator from './CompostRatioCalculator.tsx';
 import Header from './Header.tsx';
+import Footer from './Footer.tsx';
 
 export default function CompostingTips() {
   const alignCenter = { display: 'flex', alignItems: 'center' };
@@ -112,8 +113,10 @@ export default function CompostingTips() {
           <CompostRatioCalculator />  {/* Calculator component */}
         </ParallaxLayer>
         
-        
       </Parallax>
+
+
+      
     </div>
   );
 }
