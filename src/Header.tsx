@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./GlobalStyles.css"; // Assuming this file exists for global styles
 import "./Header.css"; // New CSS file for header styles
 
 const Header: React.FC = () => {
@@ -9,8 +8,8 @@ const Header: React.FC = () => {
       <div className="logo">
         <Link to="/">
           {/* Logo image next to text */}
-          <img src="/images/logo.jpeg" alt="Green Melb Logo" className="logo-image" />
-          Green Melb
+          <img src="/images/logo.png" alt="Green Melb Logo" className="logo-image" />
+          
         </Link>
       </div>
       <nav>
@@ -25,7 +24,13 @@ const Header: React.FC = () => {
             <Link to="/MapPage">Recycling centers</Link>
           </li>
           <li>
-            <Link to="/CompostingGuide">Composting Guide</Link>
+            <Link to="/PreventWaste">Prevent Waste</Link>
+          </li>
+          <li>
+            <Link to="/CompostingTips">Composting Tips</Link>
+          </li>
+          <li>
+            <Link to="/PlantRecommendation">Plant Recommendation</Link>
           </li>
         </ul>
       </nav>
