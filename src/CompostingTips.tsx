@@ -14,7 +14,7 @@ export default function CompostingTips() {
 
       <Parallax pages={5}>
         <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <p className={styles.scrollText}>Composting is a fantastic way to manage organic waste produced at home and create valuable compost for your garden. This guide will walk you through the steps to set up a compost bin, select materials, and maintain your compost effectively.</p>
+          <p className={styles.scrollText}>Learn to compost organic waste, in quick,easy steps</p>
         </ParallaxLayer>
 
         <ParallaxLayer sticky={{ start: 1, end: 1.5 }} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
@@ -112,15 +112,8 @@ export default function CompostingTips() {
           <CompostRatioCalculator />  {/* Calculator component */}
         </ParallaxLayer>
         
+        
       </Parallax>
-      <footer className="footer">
-                <p>&copy; 2024 Green Melb. All rights reserved.</p>
-                <nav>
-                    <a href="/privacy-policy">Privacy Policy</a>
-                    <a href="/terms-of-service">Terms of Service</a>
-                    
-                </nav>
-            </footer>
     </div>
   );
 }
