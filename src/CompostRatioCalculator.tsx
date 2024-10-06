@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const CompostRatioCalculator: React.FC = () => {
+    const navigate = useNavigate(); // Hook to navigate to different routes
     const [greens, setGreens] = useState<number | string>('');
     const [browns, setBrowns] = useState<number | string>('');
     const [ratio, setRatio] = useState<number | null>(null);
     const [balanceMessage, setBalanceMessage] = useState<string>('');
-    const [balanceColor, setBalanceColor] = useState<string>(''); // New state for color coding
+    const [balanceColor, setBalanceColor] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
+    const [showButtons, setShowButtons] = useState<boolean>(false); // State to control button visibility
 
     const calculateRatio = (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,28 +20,38 @@ const CompostRatioCalculator: React.FC = () => {
 
             if (compostRatio >= 2 && compostRatio <= 3) {
                 setBalanceMessage("Your compost ratio is balanced!");
-                setBalanceColor("#4CAF50");  // Green for balanced
+                setBalanceColor("#4CAF50");
             } else {
                 setBalanceMessage("Adjust the ratio to have 2-3 parts browns to 1 part greens for optimal composting.");
-                setBalanceColor("#FF9800");  // Orange for imbalance
+                setBalanceColor("#FF9800");
             }
             setError(null);
+            setShowButtons(true); // Show buttons when ratio is calculated
         } else {
             setError("Please enter valid amounts for both greens and browns.");
             setRatio(null);
             setBalanceMessage('');
             setBalanceColor('');
+            setShowButtons(false); // Hide buttons if input is invalid
         }
     };
 
+    const handlePlantRecommendations = () => {
+        navigate('/plant-recommendations'); // Navigate to plant recommendations page
+    };
+
+    const handleWastePrevention = () => {
+        navigate('/waste-prevention'); // Navigate to waste prevention page
+    };
+
     return (
-        <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <motion.div
                 className="box"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
-                style={{ padding: '20px', borderRadius: '8px', backgroundColor: '#f4f4f4', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}
+                style={{ padding: '20px', borderRadius: '8px', backgroundColor: '#f4f4f4', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', width: '100%' }}
             >
                 <h1 style={{ textAlign: 'center', color: '#333' }}>Compost Ratio Calculator</h1>
 
@@ -73,45 +86,94 @@ const CompostRatioCalculator: React.FC = () => {
                         Calculate Ratio
                     </motion.button>
                 </form>
-            </motion.div>
 
-            {ratio && (
+                {ratio && (
+                    <motion.div
+                        className="result"
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        style={{ padding: '20px', marginTop: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px', textAlign: 'center' }}
+                    >
+                        <p style={{ fontSize: '20px', color: '#333' }}>Your compost ratio (Browns to Greens) is: <strong>{ratio.toFixed(2)}</strong></p>
+                        <p style={{ fontSize: '18px', color: balanceColor }}>{balanceMessage}</p>
+                    </motion.div>
+                )}
+
+                {error && (
+                    <motion.p
+                        style={{ color: 'red', textAlign: 'center', marginTop: '20px', fontSize: '18px' }}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                    >
+                        {error}
+                    </motion.p>
+                )}
+
+                {/* Help Box */}
                 <motion.div
-                    className="result"
+                    className="help-box"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    style={{ padding: '20px', marginTop: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px', textAlign: 'center' }}
+                    style={{ marginTop: '30px', padding: '20px', borderRadius: '8px', backgroundColor: '#e0f7fa' }}
                 >
-                    <p style={{ fontSize: '20px', color: '#333' }}>Your compost ratio (Browns to Greens) is: <strong>{ratio.toFixed(2)}</strong></p>
-                    <p style={{ fontSize: '18px', color: balanceColor }}>{balanceMessage}</p>
+                    <h2 style={{ fontSize: '20px', color: '#00796b' }}>Tips: Understanding Greens and Browns</h2>
+                    <p style={{ fontSize: '16px' }}><strong>Greens:</strong> Nitrogen-rich materials like fruit and vegetable scraps, coffee grounds, and grass clippings. They are moist and high in protein.</p>
+                    <p style={{ fontSize: '16px' }}><strong>Browns:</strong> Carbon-rich materials like dry leaves, straw, and cardboard. They are dry and high in fiber.</p>
+                    <p style={{ fontSize: '16px' }}>Balance is key: aim for 2-3 parts browns to 1 part greens for optimal composting.</p>
+                </motion.div>
+            </motion.div>
+
+            {/* Navigation Buttons at the Bottom */}
+            {showButtons && (
+                <motion.div
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <motion.button
+                        onClick={handlePlantRecommendations}
+                        whileHover={{ scale: 1.05 }}
+                        style={{
+                            padding: '12px',
+                            backgroundColor: '#2196F3', // Blue background
+                            color: '#fff', // White text
+                            fontSize: '18px',
+                            borderRadius: '5px',
+                            cursor: 'pointer',
+                            border: 'none',
+                            marginBottom: '10px',
+                            fontFamily: 'monospace', // Monospace font
+                            fontWeight: 'bold', // Bold font
+                            width: '200px', // Fixed width
+                        }}
+                    >
+                        Get Plant Recommendations
+                    </motion.button>
+
+                    <motion.button
+                        onClick={handleWastePrevention}
+                        whileHover={{ scale: 1.05 }}
+                        style={{
+                            padding: '12px',
+                            backgroundColor: '#2196F3', // Blue background
+                            color: '#fff', // White text
+                            fontSize: '18px',
+                            borderRadius: '5px',
+                            cursor: 'pointer',
+                            border: 'none',
+                            fontFamily: 'monospace', // Monospace font
+                            fontWeight: 'bold', // Bold font
+                            width: '200px', // Fixed width
+                        }}
+                    >
+                        Prevent Waste
+                    </motion.button>
                 </motion.div>
             )}
-
-            {error && (
-                <motion.p
-                    style={{ color: 'red', textAlign: 'center', marginTop: '20px', fontSize: '18px' }}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                >
-                    {error}
-                </motion.p>
-            )}
-
-            {/* Help Box */}
-            <motion.div
-                className="help-box"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                style={{ marginTop: '30px', padding: '20px', borderRadius: '8px', backgroundColor: '#e0f7fa' }}
-            >
-                <h2 style={{ fontSize: '20px', color: '#00796b' }}>Tips: Understanding Greens and Browns</h2>
-                <p style={{ fontSize: '16px' }}><strong>Greens:</strong> Nitrogen-rich materials like fruit and vegetable scraps, coffee grounds, and grass clippings. They are moist and high in protein.</p>
-                <p style={{ fontSize: '16px' }}><strong>Browns:</strong> Carbon-rich materials like dry leaves, straw, and cardboard. They are dry and high in fiber.</p>
-                <p style={{ fontSize: '16px' }}>Balance is key: aim for 2-3 parts browns to 1 part greens for optimal composting.</p>
-            </motion.div>
         </div>
     );
 };

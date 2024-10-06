@@ -37,6 +37,8 @@ body {
   transition: background-color 0.3s ease; 
   margin-top: 20px; /* Space below the button */
   pointer-events: auto;
+  left: 600px; 
+  bottom:200px;
 }
 
 .cta-button:hover {
@@ -108,15 +110,4 @@ body {
     font-size: 1.2rem; /* Slightly smaller font size on small screens */
     padding: 10px; /* Reduced padding */
   }
-}
-.text-section {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  background-color: #001f3f; /* Dark background for visibility */
-  color: white;
-  padding: 10px;
-  z-index: 10; /* Ensure it appears above other elements */
 }

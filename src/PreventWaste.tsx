@@ -216,8 +216,10 @@ const PreventWaste: React.FC = () => {
             ))}
           </div>
           <button onClick={handleGeneratePDF} className={styles['action-button']}>Take Action</button>
+          <p  className={styles['text']}>Click to download a poster to remind you of your goals!</p>
         </div>
       )}
+      <Footer />
     
     </div>
   );

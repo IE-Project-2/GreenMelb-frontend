@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© 2024 Your Company Name. All rights reserved.</p>
+        <p>© GreenMelb.com. All rights reserved.</p>
         <div className="footer-links">
           <a href="#about">About</a>
           <a href="#services">Services</a>

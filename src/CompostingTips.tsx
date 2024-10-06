@@ -15,8 +15,15 @@ export default function CompostingTips() {
 
       <Parallax pages={5}>
         <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <p className={styles.scrollText}>Learn to compost organic waste, in quick,easy steps</p>
-        </ParallaxLayer>
+        <p style={{ fontSize: '4rem', fontFamily: 'monospace', fontWeight: 'bolder' , position: 'relative', top: '-150px'}}>Manage organic waste using composting</p>
+        </ParallaxLayer >
+
+        <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
+          <p className={styles.subtext}>Composting turns food scraps and yard waste into nutrient-rich compost by mixing them with air and moisture, creating soil to enrich plants.</p>
+        
+        </ParallaxLayer >
+
+        
 
         <ParallaxLayer sticky={{ start: 1, end: 1.5 }} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
           <div className={`${styles.card} ${styles.sticky}`}>
@@ -109,9 +116,56 @@ export default function CompostingTips() {
             <p>Compost is ready when dark and crumbly.</p>
           </div>
         </ParallaxLayer>
-        <ParallaxLayer offset={4} speed={1.75} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <CompostRatioCalculator />  {/* Calculator component */}
-        </ParallaxLayer>
+        
+
+
+        <ParallaxLayer offset={4} speed={1.75} style={{ ...alignCenter, justifyContent: 'center', zIndex: 10 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 10 }}>
+        <p style={{ fontSize: '3rem', fontFamily: 'monospace', fontWeight: 'bolder' }}>
+            Ready to compost?
+        </p>
+        <p style={{ fontSize: '1.5rem', fontFamily: 'monospace', fontWeight: 'bolder' }}>
+            Calculate your compost ratio
+        </p>
+        
+        <CompostRatioCalculator /> {/* Calculator component */}
+    </div>
+</ParallaxLayer>
+
+         <ParallaxLayer sticky={{ start: 0.35, end: 3 }} speed={1} style={{ zIndex: 1 }}>
+        <div
+  style={{
+    display: 'flex',
+    flexDirection: 'column', // Stack the image on top of the text
+    justifyContent: 'center', // Center vertically
+    alignItems: 'flex-end',   // Align both image and text to the right
+    height: '80vh',            
+    paddingRight: '20px',     // Space from the right side of the screen
+    fontFamily: 'monospace', 
+    fontSize: '1rem', 
+    fontWeight: 'bolder',
+    textAlign: 'right',       // Align text to the right
+  }}
+>
+  {/* Scroll Image */}
+  <img 
+    src="/images/scroll.png" // Replace with the actual URL of the image
+    alt="Scroll down"
+    style={{ 
+      width: '50px', // Adjust size
+      height: 'auto',
+      marginBottom: '-30px', // Space between image and text
+      paddingRight: '5%'
+    }} 
+  />
+
+  {/* Scroll Text */}
+  <p style={{ marginRight: '20px' }}>Scroll to learn more</p>
+</div>
+
+
+
+</ParallaxLayer>
         
       </Parallax>
 

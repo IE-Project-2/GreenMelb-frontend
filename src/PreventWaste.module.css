@@ -103,8 +103,19 @@ label {
 }
 
 .action-button {
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 10px 20px;
   font-size: 1.5rem;
+  color: rgb(12, 199, 12);
   cursor: pointer;
+  font-weight: bold; /* Bolder text */
+  font-family:  monospace; /* Monospace font */
+  margin-bottom: -10px;
+}
+
+.text{
+  font-weight: bold; /* Bolder text */
+  font-family:  monospace; /* Monospace font */
+  margin-bottom: 40px;
+  
 }

@@ -42,7 +42,7 @@ const GreenMelbLandingPage: React.FC = () => {
       <button
   className="cta-button"
   onClick={() => navigateToPage('/IdentifyWaste')}
-  style={{ zIndex: 4,position: 'relative' }} 
+  style={{ zIndex: 1,position: 'relative' }} 
 >
   Get Started
 </button>
@@ -126,7 +126,7 @@ const GreenMelbLandingPage: React.FC = () => {
         </ParallaxLayer>
 
 
-        <ParallaxLayer sticky={{ start: 0.35, end: 2.5 }} speed={2} style={{ zIndex: 2 }}>
+        <ParallaxLayer sticky={{ start: 0.35, end: 2.5 }} speed={1} style={{ zIndex: 2 }}>
         <div
   style={{
     display: 'flex',
@@ -136,7 +136,7 @@ const GreenMelbLandingPage: React.FC = () => {
     height: '100vh',            
     paddingRight: '20px',     // Space from the right side of the screen
     fontFamily: 'monospace', 
-    fontSize: '1.5rem', 
+    fontSize: '1rem', 
     fontWeight: 'bolder',
     textAlign: 'right',       // Align text to the right
   }}
@@ -146,7 +146,7 @@ const GreenMelbLandingPage: React.FC = () => {
     src="/images/scroll.png" // Replace with the actual URL of the image
     alt="Scroll down"
     style={{ 
-      width: '150px', // Adjust size
+      width: '50px', // Adjust size
       height: 'auto',
       marginBottom: '-30px', // Space between image and text
       paddingRight: '5%'

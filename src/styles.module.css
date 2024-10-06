@@ -9,14 +9,25 @@
   height: 100vh;
 }
 
-.scrollText {
+
+
+.subtext {
   font-family: monospace;
-  font-size: 3rem;
-  font-weight:bolder;
+  font-size: 1rem;
   z-index: 1;
+  position: relative; /* Allows for the 'top' property to take effect */
+  top: -50px; /* Adjust this value to move the text higher */
   
 }
-
+.scrollText {
+  font-family: monospace;
+  font-size: 5rem;
+  font-weight:bolder;
+  z-index: 1;
+  position: relative; /* Allows for the 'top' property to take effect */
+  top: -150px; /* Adjust this value to move the text higher */
+  
+}
 
 .card {
   display:flex;
@@ -495,5 +506,4 @@ height: 90%;
     height: 90%;
   }
   
-
 
