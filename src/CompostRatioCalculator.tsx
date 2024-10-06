@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router
+import './Calc.css';
 
 const CompostRatioCalculator: React.FC = () => {
     const navigate = useNavigate(); // Hook to navigate to different routes
@@ -11,6 +12,11 @@ const CompostRatioCalculator: React.FC = () => {
     const [balanceColor, setBalanceColor] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
     const [showButtons, setShowButtons] = useState<boolean>(false); // State to control button visibility
+
+    const navigate = useNavigate(); // To navigate to the Plant Recommendation page
+    const goToPlantRecommendation = () => {
+        navigate('/PlantRecommendation'); // Adjust the path as needed
+      };
 
     const calculateRatio = (e: React.FormEvent) => {
         e.preventDefault();

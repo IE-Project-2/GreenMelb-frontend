@@ -113,9 +113,22 @@ label {
   margin-bottom: -10px;
 }
 
-.text{
-  font-weight: bold; /* Bolder text */
-  font-family:  monospace; /* Monospace font */
-  margin-bottom: 40px;
-  
+.navigate-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.navigate-button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navigate-button:hover {
+  background-color: #0056b3;
 }

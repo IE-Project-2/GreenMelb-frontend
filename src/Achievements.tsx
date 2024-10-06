@@ -27,7 +27,7 @@ export default function App() {
   const parallax = useRef<IParallax>(null!);
 
   const handleClick = () => {
-    navigate('/IdentifyWaste'); // Navigate to the home route
+    navigate('/QuizPage'); // Navigate to the home route
   };
 
   return (

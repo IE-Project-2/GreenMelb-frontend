@@ -7,6 +7,8 @@ import './MapPage.css';  // Import the CSS for styling
 import Header from "./Header.tsx";
 // @ts-ignore
 import Footer from "./Footer.tsx";
+import { useNavigate } from 'react-router-dom';  
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWJiaXNoZWsiLCJhIjoiY2x6Y2trYzY5MGNucTJqcHFnMzVhNnhvcyJ9.ruwp1n7aBJwok0LXQyyRNQ';
 
@@ -18,6 +20,7 @@ const MapPage: React.FC = () => {
     const [selectedPostcode, setSelectedPostcode] = useState<string>(''); // Track selected postcode
     const [selectedCentreId, setSelectedCentreId] = useState<number | null>(null); // Track selected centre ID for highlighting
     const rowRefs = useRef<{ [key: number]: HTMLTableRowElement | null }>({}); // Store refs to all table rows
+    const navigate = useNavigate(); // For navigation
 
     useEffect(() => {
         document.title = "Map - Green Melb";
@@ -306,7 +309,13 @@ const MapPage: React.FC = () => {
                             <option value="3206" data-lat="-37.8200" data-lng="144.9556">3206 - Albert Park</option>
                         </select>
                     </div>
+                    <div className="prevent-waste-container">
+                        <p>Let's see how much waste can be prevented</p>
+                        <button className="navigate-button" onClick={() => navigate('/PreventWaste')}>Go to Prevent Waste</button>
                 </div>
+                </div>
+                
+                
             </div>
 
             <Footer />
