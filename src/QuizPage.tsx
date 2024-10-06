@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import './QuizPage.css'; // Assuming you have a separate CSS file
+import { useNavigate } from 'react-router-dom';  
+import './QuizPage.css';
+import Footer from './Footer.tsx';
+import Header from './Header.tsx'
 
 // Image URLs for waste-related images
 const images = {
@@ -10,8 +13,14 @@ const images = {
   plasticBag: '/images/plasticbag.png',
 };
 
-// Array of quiz questions with difficulty levels
-const quizQuestions = [
+interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  difficulty: 'easy' | 'medium' | 'hard'; 
+}
+
+const quizQuestions: QuizQuestion[] = [
   {
     question: 'Which of these items should go into the green bin?',
     options: ['Plastic bags', 'Aluminum cans', 'Food waste', 'Used tissues'],
@@ -62,35 +71,7 @@ const quizQuestions = [
   },
 ];
 
-// Function to determine the text color based on difficulty
-const getDifficultyStyle = (difficulty: string) => {
-  switch (difficulty) {
-    case 'easy':
-      return { color: 'green' };
-    case 'medium':
-      return { color: 'orange' };
-    case 'hard':
-      return { color: 'red' };
-    default:
-      return {};
-  }
-};
 
-// Function to return the difficulty label
-const getDifficultyLabel = (difficulty: string) => {
-  switch (difficulty) {
-    case 'easy':
-      return 'Easy';
-    case 'medium':
-      return 'Medium';
-    case 'hard':
-      return 'Hard';
-    default:
-      return '';
-  }
-};
-
-// Function to give feedback based on the user's score
 const getFeedbackMessage = (score: number, totalQuestions: number) => {
   const percentage = (score / totalQuestions) * 100;
 
@@ -109,6 +90,7 @@ const QuizPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const navigate = useNavigate();  // Initialize useNavigate
 
   const handleAnswer = (selectedOption: string) => {
     if (selectedOption === quizQuestions[currentQuestion].correctAnswer) {
@@ -125,7 +107,14 @@ const QuizPage: React.FC = () => {
   const totalQuestions = quizQuestions.length;
   const feedbackMessage = getFeedbackMessage(score, totalQuestions);
 
+  // Function to navigate to a page
+  const navigateToPage = (path: string) => {
+    navigate(path);
+  };
+
   return (
+    <>
+    <Header/>
     <div className="quiz-page">
       {/* Floating waste-related images */}
       <img src={images.bottle} alt="Bottle" className="floating-image bottle" />
@@ -141,13 +130,17 @@ const QuizPage: React.FC = () => {
             <h2>Quiz Completed!</h2>
             <p>Your Score: {score} / {totalQuestions}</p>
             <p className="feedback-message">{feedbackMessage}</p>
+            {/* Button to navigate to Camera */}
+            <button 
+              className="camera-nav-btn" 
+              onClick={() => navigateToPage('/Camera')}
+            >
+              Identify Waste
+            </button>
           </div>
         ) : (
           <div className="quiz-card">
             <h2>{quizQuestions[currentQuestion].question}</h2>
-            <p className="difficulty-label" style={getDifficultyStyle(quizQuestions[currentQuestion].difficulty)}>
-              Difficulty: {getDifficultyLabel(quizQuestions[currentQuestion].difficulty)}
-            </p>
             <div className="options">
               {quizQuestions[currentQuestion].options.map((option, index) => (
                 <button
@@ -166,6 +159,8 @@ const QuizPage: React.FC = () => {
         )}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

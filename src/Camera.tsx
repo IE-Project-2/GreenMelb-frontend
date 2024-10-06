@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Assuming you are using react-router
 import './Camera.css';
+import Footer from './Footer.tsx';
+import Header from './Header.tsx'
 
 interface DetectedItem {
   snapshot: string;
@@ -12,10 +15,10 @@ const Camera = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageUrl, setModalImageUrl] = useState('');
   const [showOverlay, setShowOverlay] = useState(true);
-  const [currentCategory, setCurrentCategory] = useState<string | null>('recyclable');
   const [classificationDetected, setClassificationDetected] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const tableRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate(); // For navigation
 
   useEffect(() => {
     const videoFeedUrl = `http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/videoclassifier/video_feed/`;
@@ -82,7 +85,12 @@ const Camera = () => {
     setShowOverlay(false);  // Hide the overlay
   };
 
+  // Check if "Ewaste" or "recyclable" exists in the detected items
+  const hasRecyclableOrEwaste = detectedItems.some(item => item.category === 'Ewaste' || item.category === 'Recyclable');
+  const hasOrganic = detectedItems.some(item => item.category === 'Organic');
+
   return (
+    <> <Header />
     <div className="camera-page">
       {/* Overlay with instructions */}
       {showOverlay && (
@@ -159,6 +167,22 @@ const Camera = () => {
             </table>
           </div>
         )}
+
+        {/* If Ewaste or recyclable exists in the table */}
+        {hasRecyclableOrEwaste && (
+          <div className="info-section">
+            <p>Looks like you have Ewaste or recyclable items. You can find nearby recycling centers.</p>
+            <button className="navigate-button" onClick={() => navigate('/MapPage')}>Find Recycling Centers</button>
+          </div>
+        )}
+
+        {/* If organic waste exists in the table */}
+        {hasOrganic && (
+          <div className="info-section">
+            <p>Looks like you have organic waste. Here are some tips for composting.</p>
+            <button className="navigate-button" onClick={() => navigate('/CompostingTips')}>Go to Composting Tips</button>
+          </div>
+        )}
       </div>
 
       {/* Modal */}
@@ -171,6 +195,8 @@ const Camera = () => {
         </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 

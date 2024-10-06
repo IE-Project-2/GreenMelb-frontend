@@ -41,7 +41,7 @@ const GreenMelbLandingPage: React.FC = () => {
       
       <button
   className="cta-button"
-  onClick={() => navigateToPage('/IdentifyWaste')}
+  onClick={() => navigateToPage('/Quiz')}
   style={{ zIndex: 4,position: 'relative' }} 
 >
   Get Started

@@ -141,6 +141,23 @@
   margin-top: 20px;
 }
 
+.camera-nav-btn {
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.camera-nav-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
 /* Responsive adjustments for mobile devices */
 @media (max-width: 768px) {
   .quiz-page {

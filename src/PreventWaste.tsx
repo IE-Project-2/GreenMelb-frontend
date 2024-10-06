@@ -1,33 +1,32 @@
 import React, { useState } from 'react';
 import { jsPDF } from 'jspdf';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import styles from './PreventWaste.module.css';
 import Header from './Header.tsx';
 
 const PreventWaste: React.FC = () => {
-  // State for inputs
   const [plasticBags, setPlasticBags] = useState<number | null>(null);
   const [organicWaste, setOrganicWaste] = useState<number | null>(null);
   const [paperWaste, setPaperWaste] = useState<number | null>(null);
   const [glassBottles, setGlassBottles] = useState<number | null>(null);
   const [aluminumCans, setAluminumCans] = useState<number | null>(null);
 
-  // Error state
   const [error, setError] = useState<string | null>(null);
 
-  // Handler for input changes
+  const navigate = useNavigate(); // Initialize navigate
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<number | null>>, maxLimit: number) => {
     const value = event.target.value;
     const validationError = validateInput(value, maxLimit);
     
-    setError(validationError); // Set error if any
+    setError(validationError); 
     if (!validationError) {
       setter(parseInt(value, 10));
     } else {
-      setter(null); // Reset state if invalid
+      setter(null); 
     }
   };
 
-  // Validation function
   const validateInput = (value: string, maxLimit: number) => {
     const parsedValue = parseInt(value, 10);
     if (!value) return null;
@@ -37,7 +36,6 @@ const PreventWaste: React.FC = () => {
     return null;
   };
 
-  // Generate contribution messages
   const generateMessage = () => {
     const contributions: string[] = [];
   
@@ -54,7 +52,6 @@ const PreventWaste: React.FC = () => {
     }
   
     if (paperWaste) {
-      // Limit the number of trees saved to a more manageable number
       const treesSaved = (paperWaste * 0.05).toFixed(2);
       contributions.push(
         `Saving ${paperWaste} sheets of paper could save ${treesSaved} trees.\nTip: Opt for digital documents and use both sides of the paper when printing.`
@@ -75,25 +72,20 @@ const PreventWaste: React.FC = () => {
   
     return contributions;
   };
-  
 
   const handleGeneratePDF = () => {
     const doc = new jsPDF();
-    
-    // Add logo at the top
     const logo = new Image();
     logo.src = '/images/logo.jpg'; 
     logo.onload = () => {
       doc.addImage(logo, 'PNG', 14, 10, 50, 20); 
     };
     
-    
     doc.setFontSize(24);
     doc.setFont('Courier', 'bold');
     doc.setTextColor(0, 51, 102); 
     doc.text('GreenMelb.com', 14, 40);
     
-    // General Tips Header
     doc.setFontSize(18);
     doc.setTextColor(0, 153, 51);
     doc.text('General Tips:', 14, 80);
@@ -108,35 +100,30 @@ const PreventWaste: React.FC = () => {
     
     tips.forEach((tip, index) => {
       doc.setFontSize(14);
-      doc.setTextColor(0, 0, 0); // Black for tips
-      doc.text(tip, 14, 95 + (index * 10)); // Adjust the Y position for each tip
+      doc.setTextColor(0, 0, 0);
+      doc.text(tip, 14, 95 + (index * 10)); 
     });
     
-
     const contributions = generateMessage();
     
     contributions.forEach((contribution, index) => {
       doc.setFontSize(14);
-      doc.setTextColor(0, 0, 0); // Black for goals
+      doc.setTextColor(0, 0, 0);
       doc.text(`Goal ${index + 1}:`, 14, 145 + (index * 30)); 
       doc.setFontSize(12);
-      doc.setTextColor(50, 50, 50); // Dark Gray for subtext
+      doc.setTextColor(50, 50, 50);
   
-      // Modify contribution text to limit decimals and prevent overlapping
       const contributionText = contribution.replace(/(\d+\.\d{2})\d+/g, '$1'); 
       doc.text(contributionText, 14, 155 + (index * 30)); 
-
-       // Add a thank you message
-    doc.setFontSize(16);
-    doc.setFont('Courier', 'normal');
-    doc.setTextColor(0, 102, 204); // Medium Blue
-    doc.text('Thank you for making Melbourne a cleaner city!', 14, 60);
+  
+      doc.setFontSize(16);
+      doc.setFont('Courier', 'normal');
+      doc.setTextColor(0, 102, 204);
+      doc.text('Thank you for making Melbourne a cleaner city!', 14, 60);
     });
   
-    // Save the document
     doc.save('clean_melbourne_poster.pdf');
   };
-  
 
   return (
     <div className={styles.container}>
@@ -194,10 +181,8 @@ const PreventWaste: React.FC = () => {
         />
       </div>
 
-      {/* Display error message */}
       {error && <p className={styles.error}>{error}</p>}
 
-      {/* Output the messages if at least one input has been entered */}
       {(!error && (plasticBags || organicWaste || paperWaste || glassBottles || aluminumCans)) && (
         <div className={styles['fact-output']}>
           <h2>Your Contribution:</h2>
@@ -211,6 +196,13 @@ const PreventWaste: React.FC = () => {
           <button onClick={handleGeneratePDF} className={styles['action-button']}>Take Action</button>
         </div>
       )}
+
+      {/* Button to navigate to WastePrediction */}
+      <div className={styles['navigate-container']}>
+        <button onClick={() => navigate('/WastePrediction')} className={styles['navigate-button']}>
+          See how an average household produces waste
+        </button>
+      </div>
     </div>
   );
 };

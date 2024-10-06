@@ -228,12 +228,56 @@ html, body {
     color: white; /* Same text color as normal */
 }
 
+.items-table h2 {
+    color: #ffffff;  /* Change the text color to white */
+    font-size: 2rem; /* Increase the size a bit for better visibility */
+    font-family: monospace; /* Keep the monospace theme */
+    margin-bottom: 20px; /* Add some space between the heading and the table */
+    text-align: center; /* Ensure it's centered */
+}
+
 .error-message {
     color: red;
     font-size: 1.2rem;
     margin-top: 10px;
     font-family: monospace;
   }
+
+/* Section for information about recycling centers or composting */
+.info-section {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: monospace;
+    color: #fff; /* Text color for better contrast */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.info-section p {
+    font-size: 1.4rem; /* Slightly increase font size for better readability */
+    margin-bottom: 20px;
+}
+
+
+/* Button for navigating to other pages (MapPage, CompostingTips) */
+.navigate-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: Arial, sans-serif; /* Use default sans-serif for the button */
+}
+
+.navigate-button:hover {
+    background-color: #0056b3; 
+    transform: scale(1.05); 
+}
 
 /* Responsive design adjustments for smaller screens */
 @media (max-width: 768px) {
@@ -272,6 +316,13 @@ html, body {
 
     .understand-button {
         font-size: 1rem; /* Reduce button size in overlay */
+        padding: 8px 16px;
+    }
+    .info-section {
+        font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+    .navigate-button {
+        font-size: 1rem;
         padding: 8px 16px;
     }
 }
