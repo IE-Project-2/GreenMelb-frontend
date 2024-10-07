@@ -134,6 +134,7 @@ const Camera = () => {
               <h2>Welcome to Live Waste Classification</h2>
               <p>Instructions:</p>
               <ul>
+                <li>Hold one single item that you want to be classified in the frame.</li>
                 <li>Click "Add" to classify the waste item.</li>
                 <li>View the classified items in the table below.</li>
                 <li>You can click on the Snapshot column of the table to expand the image.</li>
