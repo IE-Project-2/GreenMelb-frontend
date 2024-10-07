@@ -16,9 +16,10 @@ const Camera = () => {
   const [showOverlay, setShowOverlay] = useState(true);
   const [classificationDetected, setClassificationDetected] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null); // Ref for user camera stream
+  const [loading, setLoading] = useState<boolean>(false); // Loading state for the spinner
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const tableRef = useRef<HTMLDivElement | null>(null);
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserMedia = async () => {
@@ -51,6 +52,7 @@ const Camera = () => {
   // Capture the current frame from the user's video and send it to the backend for classification
   const captureFrameAndSendToBackend = async () => {
     try {
+      setLoading(true); // Start loading spinner
       const canvas = document.createElement('canvas');
       const videoElement = videoRef.current;
 
@@ -83,7 +85,7 @@ const Camera = () => {
 
             const newItem: DetectedItem = {
               snapshot: snapshotUrl,
-              category: data.detected_categories,  // Use backend-detected categories
+              category: data.detected_categories,
             };
 
             setDetectedItems((prevItems) => [...prevItems, newItem]);
@@ -98,6 +100,8 @@ const Camera = () => {
     } catch (error) {
       console.error('Error adding item:', error);
       setErrorMessage('Failed to capture and classify frame. Please try again.');
+    } finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -155,8 +159,13 @@ const Camera = () => {
 
           {!classificationDetected && <div className="error-message">{errorMessage}</div>}
 
+          {/* Loading Spinner */}
+          {loading && <div className="spinner">Loading...</div>}
+
           <div className="add-item-section">
-            <button onClick={captureFrameAndSendToBackend} className="add-button">Add to Table</button>
+            <button onClick={captureFrameAndSendToBackend} className="add-button" disabled={loading}>
+              {loading ? 'Classifying...' : 'Add to Table'}
+            </button>
           </div>
 
           {detectedItems.length > 0 && (
