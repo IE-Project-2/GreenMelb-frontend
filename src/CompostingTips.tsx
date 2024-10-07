@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import styles from './styles.module.css'; 
+import { useEffect } from 'react';
 import CompostRatioCalculator from './CompostRatioCalculator.tsx';
 import Header from './Header.tsx';
+import Footer from './Footer.tsx';
 
 export default function CompostingTips() {
   const alignCenter = { display: 'flex', alignItems: 'center' };
+
+  useEffect(() => {
+    document.title = "Composting Tips - Green Melb"; // Set the document title for this page
+  }, []);
   
   return (
     <div>
@@ -14,8 +20,61 @@ export default function CompostingTips() {
 
       <Parallax pages={5}>
         <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <p className={styles.scrollText}>Learn to compost organic waste, in quick,easy steps</p>
-        </ParallaxLayer>
+        <p style={{ fontSize: '4rem', fontFamily: 'monospace', fontWeight: 'bolder' , position: 'relative', top: '-150px'}}>Manage organic waste using composting</p>
+        </ParallaxLayer >
+
+        <ParallaxLayer offset={0.4} speed={0.5} className="container" style={{ zIndex: 2 }}>
+  <p className={styles.subtext}>
+    Composting turns food scraps and yard waste into nutrient-rich compost by mixing them with air and moisture, creating soil to enrich plants.
+  </p>
+
+  <div className="button-container">
+    
+    <button 
+        className={styles.button} 
+        onClick={() => window.location.href = '/CompostRatioCalculator'} 
+      >
+        Compost Calculator
+      </button>
+
+    <button className={styles.button}  onClick={() => window.location.href = '/PlantRecommendation'}>
+      Get Plant Recommendations
+    </button>
+
+    
+    <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column', // Stack the image on top of the text
+              justifyContent: 'center', // Center vertically
+              alignItems: 'center', // Center both image and text horizontally
+              height: '100vh', // Take full viewport height
+              fontFamily: 'monospace',
+              fontSize: '1rem',
+              fontWeight: 'bolder',
+              textAlign: 'center', // Center text
+            }}
+          >
+            <p className={styles.smalltext}>New to Composting? Scroll to learn composting in easy steps</p>
+            {/* Scroll Image */}
+            <img
+              src="/images/scroll.png" // Replace with the actual URL of the image
+              alt="Scroll down"
+              style={{
+                width: '100px', // Adjust size
+                height: 'auto',
+                marginBottom: '500px', // Space between image and text
+                paddingRight: '5%' // Optional, remove if not needed
+              }}
+            />
+          </div>
+  </div>
+</ParallaxLayer>
+
+
+
+
+        
 
         <ParallaxLayer sticky={{ start: 1, end: 1.5 }} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
           <div className={`${styles.card} ${styles.sticky}`}>
@@ -108,12 +167,38 @@ export default function CompostingTips() {
             <p>Compost is ready when dark and crumbly.</p>
           </div>
         </ParallaxLayer>
-        <ParallaxLayer offset={4} speed={1.75} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <CompostRatioCalculator />  {/* Calculator component */}
-        </ParallaxLayer>
         
+
+
+        <ParallaxLayer offset={4} speed={1.75} style={{ ...alignCenter, justifyContent: 'center', zIndex: 10 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 10 }}>
+        <p style={{ fontSize: '3rem', fontFamily: 'monospace', fontWeight: 'bolder' }}>
+            Ready to compost?
+        </p>
+        <p style={{ fontSize: '1.5rem', fontFamily: 'monospace', fontWeight: 'bolder' }}>
+            Calculate your compost ratio
+        </p>
+        <button 
+        className={styles.button} 
+        onClick={() => window.location.href = '/CompostRatioCalculator'} 
+      >
+        Compost Calculator
+      </button>
+        
+    </div>
+</ParallaxLayer>
+
+
+         
+
+
+
+
         
       </Parallax>
+
+
+      
     </div>
   );
 }

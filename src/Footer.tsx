@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
 import './Footer.css';
-
 
 const Footer: React.FC = () => {
   return (
     <footer className="footer">
-      <p>&copy; 2024 Green Melb. All rights reserved.</p>
-                <nav>
-                    <a href="/privacy-policy">Privacy Policy</a>
-                    <a href="/terms-of-service">Terms of Service</a>
-                </nav>
+      <div className="footer-content">
+        <p>© GreenMelb.com. All rights reserved.</p>
+        <div className="footer-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
     </footer>
   );
 };

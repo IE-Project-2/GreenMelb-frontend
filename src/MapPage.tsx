@@ -23,7 +23,7 @@ const MapPage: React.FC = () => {
     const navigate = useNavigate(); // For navigation
 
     useEffect(() => {
-        document.title = "Map - Green Melb";
+        document.title = "Recycling centers - Green Melb";
     }, []);
 
     useEffect(() => {

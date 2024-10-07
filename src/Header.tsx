@@ -23,14 +23,13 @@ const Header: React.FC = () => {
           <li>
             <Link to="/MapPage">Recycling centers</Link>
           </li>
-          <li>
-            <Link to="/PreventWaste">Prevent Waste</Link>
-          </li>
+          
           <li>
             <Link to="/CompostingTips">Composting Tips</Link>
           </li>
+          
           <li>
-            <Link to="/PlantRecommendation">Plant Recommendation</Link>
+            <Link to="/PreventWaste">Prevent Waste</Link>
           </li>
         </ul>
       </nav>

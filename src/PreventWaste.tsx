@@ -3,6 +3,8 @@ import { jsPDF } from 'jspdf';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import styles from './PreventWaste.module.css';
 import Header from './Header.tsx';
+import Footer from './Footer.tsx';
+import { useEffect } from 'react';
 
 const PreventWaste: React.FC = () => {
   const [plasticBags, setPlasticBags] = useState<number | null>(null);
@@ -35,6 +37,10 @@ const PreventWaste: React.FC = () => {
     if (parsedValue > maxLimit) return `Please enter a value less than ${maxLimit}`;
     return null;
   };
+  useEffect(() => {
+    document.title = "Prevent Waste- Green Melb"; // Set the document title for this page
+  }, []);
+
 
   const generateMessage = () => {
     const contributions: string[] = [];
@@ -132,54 +138,61 @@ const PreventWaste: React.FC = () => {
 
       {/* Input Fields */}
       <div>
-        <label htmlFor="plastic-bags">I will save:</label>
-        <input
-          id="plastic-bags"
-          type="number"
-          placeholder="Plastic bags per month (Max 100)"
-          onChange={(e) => handleInputChange(e, setPlasticBags, 100)}
-        />
-      </div>
+  <label htmlFor="plastic-bags">Plastic bags I will save: </label>
+  <input
+    id="plastic-bags"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Plastic bags per month (Max 100)"
+    onChange={(e) => handleInputChange(e, setPlasticBags, 100)}
+  />
+  
+</div>
 
-      <div>
-        <label htmlFor="organic-waste">I will reduce:</label>
-        <input
-          id="organic-waste"
-          type="number"
-          placeholder="Kg of organic waste per month (Max 500)"
-          onChange={(e) => handleInputChange(e, setOrganicWaste, 500)}
-        />
-      </div>
+<div>
+  <label htmlFor="organic-waste">Organic waste that I will reduce:</label>
+  <input
+    id="organic-waste"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Kg of organic waste per month (Max 500)"
+    onChange={(e) => handleInputChange(e, setOrganicWaste, 500)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="paper-waste">I will save:</label>
-        <input
-          id="paper-waste"
-          type="number"
-          placeholder="Sheets of paper per month (Max 1000)"
-          onChange={(e) => handleInputChange(e, setPaperWaste, 1000)}
-        />
-      </div>
+<div>
+  <label htmlFor="paper-waste">Paper waste that I will save:</label>
+  <input
+    id="paper-waste"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Sheets of paper per month (Max 1000)"
+    onChange={(e) => handleInputChange(e, setPaperWaste, 1000)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="glass-bottles">I will recycle:</label>
-        <input
-          id="glass-bottles"
-          type="number"
-          placeholder="Glass bottles per month (Max 500)"
-          onChange={(e) => handleInputChange(e, setGlassBottles, 500)}
-        />
-      </div>
+<div>
+  <label htmlFor="glass-bottles">Glass bottles I will recycle:</label>
+  <input
+    id="glass-bottles"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Glass bottles per month (Max 500)"
+    onChange={(e) => handleInputChange(e, setGlassBottles, 500)}
+  />
+</div>
 
-      <div>
-        <label htmlFor="aluminum-cans">I will recycle:</label>
-        <input
-          id="aluminum-cans"
-          type="number"
-          placeholder="Aluminum cans per month (Max 1000)"
-          onChange={(e) => handleInputChange(e, setAluminumCans, 1000)}
-        />
-      </div>
+<div>
+  <label htmlFor="aluminum-cans">Cans I will recycle:</label>
+  <input
+    id="aluminum-cans"
+    type="number"
+    className={styles['input-field']} // Add className for styling
+    placeholder="Aluminum cans per month (Max 1000)"
+    onChange={(e) => handleInputChange(e, setAluminumCans, 1000)}
+  />
+</div>
+
 
       {error && <p className={styles.error}>{error}</p>}
 
@@ -194,6 +207,7 @@ const PreventWaste: React.FC = () => {
             ))}
           </div>
           <button onClick={handleGeneratePDF} className={styles['action-button']}>Take Action</button>
+          <p  className={styles['text']}>Click to download a poster to remind you of your goals!</p>
         </div>
       )}
 
@@ -203,6 +217,7 @@ const PreventWaste: React.FC = () => {
           See how an average household produces waste
         </button>
       </div>
+      <Footer />
     </div>
   );
 };
