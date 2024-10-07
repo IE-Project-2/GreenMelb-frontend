@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';  
 import './QuizPage.css';
 import Footer from './Footer.tsx';
@@ -19,6 +19,11 @@ interface QuizQuestion {
   correctAnswer: string;
   difficulty: 'easy' | 'medium' | 'hard'; 
 }
+
+useEffect(() => {
+  document.title = 'Quiz - Green Melb';
+}, []);
+
 
 const quizQuestions: QuizQuestion[] = [
   {

@@ -10,7 +10,9 @@ import Footer from "./Footer.tsx";
 import { useNavigate } from 'react-router-dom';  
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWJiaXNoZWsiLCJhIjoiY2x6Y2trYzY5MGNucTJqcHFnMzVhNnhvcyJ9.ruwp1n7aBJwok0LXQyyRNQ';
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY || '';
+
+
 
 const MapPage: React.FC = () => {
     const [map, setMap] = useState<mapboxgl.Map | null>(null);

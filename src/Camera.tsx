@@ -25,6 +25,10 @@ const Camera = () => {
     setStreamUrl(videoFeedUrl);
   }, []);
 
+  useEffect(() => {
+    document.title = 'Live Classification - Green Melb';
+  }, []);
+
   const handleAddItem = async () => {
     try {
       const response = await fetch(`http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/videoclassifier/capture_and_classify_frame/`, {
