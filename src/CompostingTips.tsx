@@ -24,29 +24,45 @@ export default function CompostingTips() {
   </p>
 
   <div className="button-container">
-  <button 
-      className={styles.button} 
-      onClick={() => window.scrollTo({ top: window.innerHeight + 1400, behavior: 'smooth' })} 
-    >
-      Learn Composting
-    </button>
     
     <button 
-    className={styles.button} 
-    onClick={() => {
-        // Navigate to the parallax page 3
-        window.location.href = '/parallax-page-3'; // Adjust the URL as needed
-    }} 
->
-    Compost Calculator
-</button>
-
-
-
+        className={styles.button} 
+        onClick={() => window.location.href = '/CompostRatioCalculator'} 
+      >
+        Compost Calculator
+      </button>
 
     <button className={styles.button}  onClick={() => window.location.href = '/PlantRecommendation'}>
       Get Plant Recommendations
     </button>
+
+    
+    <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column', // Stack the image on top of the text
+              justifyContent: 'center', // Center vertically
+              alignItems: 'center', // Center both image and text horizontally
+              height: '100vh', // Take full viewport height
+              fontFamily: 'monospace',
+              fontSize: '1rem',
+              fontWeight: 'bolder',
+              textAlign: 'center', // Center text
+            }}
+          >
+            <p className={styles.smalltext}>New to Composting? Scroll to learn composting in easy steps</p>
+            {/* Scroll Image */}
+            <img
+              src="/images/scroll.png" // Replace with the actual URL of the image
+              alt="Scroll down"
+              style={{
+                width: '100px', // Adjust size
+                height: 'auto',
+                marginBottom: '500px', // Space between image and text
+                paddingRight: '5%' // Optional, remove if not needed
+              }}
+            />
+          </div>
   </div>
 </ParallaxLayer>
 
@@ -157,10 +173,16 @@ export default function CompostingTips() {
         <p style={{ fontSize: '1.5rem', fontFamily: 'monospace', fontWeight: 'bolder' }}>
             Calculate your compost ratio
         </p>
+        <button 
+        className={styles.button} 
+        onClick={() => window.location.href = '/CompostRatioCalculator'} 
+      >
+        Compost Calculator
+      </button>
         
-        <CompostRatioCalculator /> {/* Calculator component */}
     </div>
 </ParallaxLayer>
+
 
          
 

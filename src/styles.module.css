@@ -510,12 +510,7 @@ height: 90%;
     padding-top: 100px; /* Adjust this value to move the content down */
   }
   
-  .subtext {
-    font-family: monospace;
-    font-size: 1rem;
-    margin-bottom: 20px; /* Space between text and buttons */
-    padding-top: 20px;
-  }
+  
   
   .button-container {
     display: flex; /* Use flexbox for buttons */
@@ -541,6 +536,13 @@ height: 90%;
   .button:hover {
     background-color: darkblue; /* Darker blue when hovered */
   }
-  
+
+  .subtext {
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin-bottom: 20px; /* Space between text and buttons */
+    padding-top: 20px;
+  }
   
   
