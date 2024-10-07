@@ -18,10 +18,40 @@ export default function CompostingTips() {
         <p style={{ fontSize: '4rem', fontFamily: 'monospace', fontWeight: 'bolder' , position: 'relative', top: '-150px'}}>Manage organic waste using composting</p>
         </ParallaxLayer >
 
-        <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <p className={styles.subtext}>Composting turns food scraps and yard waste into nutrient-rich compost by mixing them with air and moisture, creating soil to enrich plants.</p>
-        
-        </ParallaxLayer >
+        <ParallaxLayer offset={0.4} speed={0.5} className="container" style={{ zIndex: 2 }}>
+  <p className={styles.subtext}>
+    Composting turns food scraps and yard waste into nutrient-rich compost by mixing them with air and moisture, creating soil to enrich plants.
+  </p>
+
+  <div className="button-container">
+  <button 
+      className={styles.button} 
+      onClick={() => window.scrollTo({ top: window.innerHeight + 1400, behavior: 'smooth' })} 
+    >
+      Learn Composting
+    </button>
+    
+    <button 
+    className={styles.button} 
+    onClick={() => {
+        // Navigate to the parallax page 3
+        window.location.href = '/parallax-page-3'; // Adjust the URL as needed
+    }} 
+>
+    Compost Calculator
+</button>
+
+
+
+
+    <button className={styles.button}  onClick={() => window.location.href = '/PlantRecommendation'}>
+      Get Plant Recommendations
+    </button>
+  </div>
+</ParallaxLayer>
+
+
+
 
         
 
@@ -132,40 +162,11 @@ export default function CompostingTips() {
     </div>
 </ParallaxLayer>
 
-         <ParallaxLayer sticky={{ start: 0.35, end: 3 }} speed={1} style={{ zIndex: 1 }}>
-        <div
-  style={{
-    display: 'flex',
-    flexDirection: 'column', // Stack the image on top of the text
-    justifyContent: 'center', // Center vertically
-    alignItems: 'flex-end',   // Align both image and text to the right
-    height: '80vh',            
-    paddingRight: '20px',     // Space from the right side of the screen
-    fontFamily: 'monospace', 
-    fontSize: '1rem', 
-    fontWeight: 'bolder',
-    textAlign: 'right',       // Align text to the right
-  }}
->
-  {/* Scroll Image */}
-  <img 
-    src="/images/scroll.png" // Replace with the actual URL of the image
-    alt="Scroll down"
-    style={{ 
-      width: '50px', // Adjust size
-      height: 'auto',
-      marginBottom: '-30px', // Space between image and text
-      paddingRight: '5%'
-    }} 
-  />
-
-  {/* Scroll Text */}
-  <p style={{ marginRight: '20px' }}>Scroll to learn more</p>
-</div>
+         
 
 
 
-</ParallaxLayer>
+
         
       </Parallax>
 

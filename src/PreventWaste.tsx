@@ -133,7 +133,7 @@ const PreventWaste: React.FC = () => {
 
       {/* Input Fields */}
       <div>
-  <label htmlFor="plastic-bags">I will save:</label>
+  <label htmlFor="plastic-bags">Plastic bags I will save: </label>
   <input
     id="plastic-bags"
     type="number"
@@ -141,10 +141,11 @@ const PreventWaste: React.FC = () => {
     placeholder="Plastic bags per month (Max 100)"
     onChange={(e) => handleInputChange(e, setPlasticBags, 100)}
   />
+  
 </div>
 
 <div>
-  <label htmlFor="organic-waste">I will reduce:</label>
+  <label htmlFor="organic-waste">Organic waste that I will reduce:</label>
   <input
     id="organic-waste"
     type="number"
@@ -155,7 +156,7 @@ const PreventWaste: React.FC = () => {
 </div>
 
 <div>
-  <label htmlFor="paper-waste">I will save:</label>
+  <label htmlFor="paper-waste">Paper waste that I will save:</label>
   <input
     id="paper-waste"
     type="number"
@@ -166,7 +167,7 @@ const PreventWaste: React.FC = () => {
 </div>
 
 <div>
-  <label htmlFor="glass-bottles">I will recycle:</label>
+  <label htmlFor="glass-bottles">Glass bottles I will recycle:</label>
   <input
     id="glass-bottles"
     type="number"
@@ -177,7 +178,7 @@ const PreventWaste: React.FC = () => {
 </div>
 
 <div>
-  <label htmlFor="aluminum-cans">I will recycle:</label>
+  <label htmlFor="aluminum-cans">Cans I will recycle:</label>
   <input
     id="aluminum-cans"
     type="number"
@@ -211,6 +212,7 @@ const PreventWaste: React.FC = () => {
           See how an average household produces waste
         </button>
       </div>
+      <Footer />
     </div>
   );
 };

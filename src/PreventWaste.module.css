@@ -32,7 +32,7 @@ label {
   font-size: 1.5rem;        /* Maintain larger font size */
   padding: 10px;            /* Increase padding for more space */
   height: 20px;             /* Set a fixed height for uniformity */
-  width: 70%;              /* Full width */
+  width: 50%;              /* Full width */
   border-radius: 10px;      /* Rounded corners */
   border: 1px solid #ccc;   /* Light gray border */
   margin-bottom: 30px;      /* Space below each input */
@@ -127,6 +127,9 @@ label {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  font-family: monospace;
+  font-size: 1.5rem;
 }
 
 .navigate-button:hover {

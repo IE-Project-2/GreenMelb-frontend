@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router
 import './Calc.css';
+import Header from './Header.tsx';
 
 const CompostRatioCalculator: React.FC = () => {
     const navigate = useNavigate(); // Hook to navigate to different routes
@@ -13,7 +14,6 @@ const CompostRatioCalculator: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [showButtons, setShowButtons] = useState<boolean>(false); // State to control button visibility
 
-    const navigate = useNavigate(); // To navigate to the Plant Recommendation page
     const goToPlantRecommendation = () => {
         navigate('/PlantRecommendation'); // Adjust the path as needed
       };
@@ -59,6 +59,7 @@ const CompostRatioCalculator: React.FC = () => {
                 transition={{ duration: 1 }}
                 style={{ padding: '20px', borderRadius: '8px', backgroundColor: '#f4f4f4', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', width: '100%' }}
             >
+                
                 <h1 style={{ textAlign: 'center', color: '#333' }}>Compost Ratio Calculator</h1>
 
                 <form onSubmit={calculateRatio} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -132,54 +133,7 @@ const CompostRatioCalculator: React.FC = () => {
                 </motion.div>
             </motion.div>
 
-            {/* Navigation Buttons at the Bottom */}
-            {showButtons && (
-                <motion.div
-                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <motion.button
-                        onClick={handlePlantRecommendations}
-                        whileHover={{ scale: 1.05 }}
-                        style={{
-                            padding: '12px',
-                            backgroundColor: '#2196F3', // Blue background
-                            color: '#fff', // White text
-                            fontSize: '18px',
-                            borderRadius: '5px',
-                            cursor: 'pointer',
-                            border: 'none',
-                            marginBottom: '10px',
-                            fontFamily: 'monospace', // Monospace font
-                            fontWeight: 'bold', // Bold font
-                            width: '200px', // Fixed width
-                        }}
-                    >
-                        Get Plant Recommendations
-                    </motion.button>
-
-                    <motion.button
-                        onClick={handleWastePrevention}
-                        whileHover={{ scale: 1.05 }}
-                        style={{
-                            padding: '12px',
-                            backgroundColor: '#2196F3', // Blue background
-                            color: '#fff', // White text
-                            fontSize: '18px',
-                            borderRadius: '5px',
-                            cursor: 'pointer',
-                            border: 'none',
-                            fontFamily: 'monospace', // Monospace font
-                            fontWeight: 'bold', // Bold font
-                            width: '200px', // Fixed width
-                        }}
-                    >
-                        Prevent Waste
-                    </motion.button>
-                </motion.div>
-            )}
+            
         </div>
     );
 };
