@@ -161,7 +161,7 @@ const WastePrediction: React.FC = () => {
               Total Waste: {Object.values(wasteCategories).reduce((acc, cur) => acc + cur, 0).toFixed(2)} kg per
               month
             </h2>
-            <Bar data={chartData} options={chartOptions} height={100} />
+            <Bar data={chartData} options={chartOptions} height={300} width={600} />
             <p className="hover-text">
               Hover on the bars to see the estimated waste for each category per month.
             </p>
