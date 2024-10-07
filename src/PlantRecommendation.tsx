@@ -93,6 +93,7 @@ const PlantRecommendation: React.FC = () => {
           </div>
 
           <button type="submit" className="getRecommendationButton">Get Recommendations</button>
+          
         </form>
 
         {/* Display Error or Plant Information */}
@@ -114,7 +115,7 @@ const PlantRecommendation: React.FC = () => {
           )}
         </div>
       </div>
-      <Footer className="footer" />
+      <Footer/>
     </div>
   );
 };

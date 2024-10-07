@@ -1,12 +1,17 @@
 import * as React from 'react';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import styles from './styles.module.css'; 
+import { useEffect } from 'react';
 import CompostRatioCalculator from './CompostRatioCalculator.tsx';
 import Header from './Header.tsx';
 import Footer from './Footer.tsx';
 
 export default function CompostingTips() {
   const alignCenter = { display: 'flex', alignItems: 'center' };
+
+  useEffect(() => {
+    document.title = "Composting Tips - Green Melb"; // Set the document title for this page
+  }, []);
   
   return (
     <div>

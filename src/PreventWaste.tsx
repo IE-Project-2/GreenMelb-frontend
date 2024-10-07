@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for naviga
 import styles from './PreventWaste.module.css';
 import Header from './Header.tsx';
 import Footer from './Footer.tsx';
+import { useEffect } from 'react';
 
 const PreventWaste: React.FC = () => {
   const [plasticBags, setPlasticBags] = useState<number | null>(null);
@@ -36,6 +37,10 @@ const PreventWaste: React.FC = () => {
     if (parsedValue > maxLimit) return `Please enter a value less than ${maxLimit}`;
     return null;
   };
+  useEffect(() => {
+    document.title = "Prevent Waste- Green Melb"; // Set the document title for this page
+  }, []);
+
 
   const generateMessage = () => {
     const contributions: string[] = [];

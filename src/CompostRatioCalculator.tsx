@@ -5,6 +5,8 @@ import './Calc.css';
 import Header from './Header.tsx';
 import Footer from './Footer.tsx'; // Import the Footer component
 import styles from './styles.module.css';
+import { useEffect } from 'react';
+
 
 const CompostRatioCalculator: React.FC = () => {
     const navigate = useNavigate(); // Hook to navigate to different routes
@@ -14,11 +16,14 @@ const CompostRatioCalculator: React.FC = () => {
     const [balanceMessage, setBalanceMessage] = useState<string>('');
     const [balanceColor, setBalanceColor] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
-    const [showButtons, setShowButtons] = useState<boolean>(false); // State to control button visibility
+    const [showButtons, setShowButtons] = useState<boolean>(false); 
 
     const goToPlantRecommendation = () => {
-        navigate('/PlantRecommendation'); // Adjust the path as needed
+        navigate('/PlantRecommendation'); 
     };
+    useEffect(() => {
+        document.title = "Compost Ratio - Green Melb"; 
+      }, []);
 
     const calculateRatio = (e: React.FormEvent) => {
         e.preventDefault();
@@ -45,7 +50,7 @@ const CompostRatioCalculator: React.FC = () => {
     };
 
     const handlePlantRecommendations = () => {
-        navigate('/PlantRecommendations'); // Navigate to plant recommendations page
+        navigate('/PlantRecommendation'); // Navigate to plant recommendations page
     };
 
     const handleWastePrevention = () => {
