@@ -32,7 +32,7 @@ const PlantRecommendation: React.FC = () => {
       });
 
       setPlant(response.data);  // Update with the fetched plant data
-      setError('');  // Clear any previous errors
+      setError('');  
     } catch (error) {
       console.error('Error fetching plant recommendations:', error);
       setError('No plants found. Please refine your search.');
@@ -68,7 +68,7 @@ const PlantRecommendation: React.FC = () => {
             </label>
           </div>
 
-          <div className="formGroup">
+          {/* <div className="formGroup">
             <label>
               <span className="labelText">Location:</span>
               <select value={location} onChange={(e) => setLocation(e.target.value)} className="dropdown">
@@ -78,7 +78,7 @@ const PlantRecommendation: React.FC = () => {
                 <option value="Filtered sunlight">Filtered sunlight</option>
               </select>
             </label>
-          </div>
+          </div> */}
 
           <div className="formGroup">
             <label>
