@@ -14,6 +14,9 @@ import SearchPage from "./SearchPage.tsx";
 import Camera from "./Camera.tsx"; 
 import Quiz from "./QuizPage.tsx";
 import PreventWaste from "./PreventWaste.tsx";
+import PrivacyPolicy from "./PrivacyPolicy.tsx";
+import TermsOfService from "./TermsOfService.tsx";
+import ProductVideo from "./ProductVideo.tsx";
 
 export default function App() {
   return (
@@ -35,6 +38,10 @@ export default function App() {
             <Route path="/Camera" element={<Camera />} />
             <Route path="/Quiz" element={<Quiz/>}/>
             <Route path="/SearchPage" element = {<SearchPage />} />
+            <Route path="/PrivacyPolicy" element = {<PrivacyPolicy/>}/>
+            <Route path="/TermsOfService" element = {<TermsOfService/>}/>
+            <Route path="/ProductVideo" element = {<ProductVideo/>}/>
+
           
            
             <Route path="*" element={<NoPage />} />{" "}

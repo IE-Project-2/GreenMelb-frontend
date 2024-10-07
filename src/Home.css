@@ -111,3 +111,18 @@ body {
     padding: 10px; /* Reduced padding */
   }
 }
+.productbutton {
+  padding: 15px 30px; 
+  font-size: 1.2rem; 
+  font-family: monospace; 
+  color: #fff;
+  background-color: rgb(14, 0, 138);
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  margin-top: 20px; /* Space below the button */
+  pointer-events: auto;
+ 
+  bottom:20px;
+}
