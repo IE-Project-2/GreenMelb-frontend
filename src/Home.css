@@ -37,8 +37,7 @@ body {
   transition: background-color 0.3s ease; 
   margin-top: 20px; /* Space below the button */
   pointer-events: auto;
-  left: 600px; 
-  bottom:200px;
+  bottom:5px;
 }
 
 .cta-button:hover {
