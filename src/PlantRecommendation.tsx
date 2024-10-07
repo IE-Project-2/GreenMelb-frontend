@@ -13,12 +13,29 @@ const PlantRecommendation: React.FC = () => {
   const [maintenanceType, setMaintenanceType] = useState('');
   const [plant, setPlant] = useState<any>(null);
   const [error, setError] = useState('');  // Add error state to show in case of failure
+  const [buttonText, setButtonText] = useState('Get Recommendations');  // State for button text
 
   useEffect(() => {
     document.title = "Recommend Plant - Green Melb";
-}, []);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form inputs before submitting
+    if (!category) {
+      setError('Please select a category.');
+      return;
+    }
+    if (!floweringCategory) {
+      setError('Please select a flowering category.');
+      return;
+    }
+    if (!maintenanceType) {
+      setError('Please select a maintenance type.');
+      return;
+    }
+
     try {
       const apiUrl = `http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/plants/PlantRecommendation/`;
 
@@ -32,7 +49,8 @@ const PlantRecommendation: React.FC = () => {
       });
 
       setPlant(response.data);  // Update with the fetched plant data
-      setError('');  
+      setError('');  // Clear the error message
+      setButtonText('Get Another');  // Change button text after first click
     } catch (error) {
       console.error('Error fetching plant recommendations:', error);
       setError('No plants found. Please refine your search.');
@@ -68,18 +86,6 @@ const PlantRecommendation: React.FC = () => {
             </label>
           </div>
 
-          {/* <div className="formGroup">
-            <label>
-              <span className="labelText">Location:</span>
-              <select value={location} onChange={(e) => setLocation(e.target.value)} className="dropdown">
-                <option value="">Select location</option>
-                <option value="Indirect sunlight">Indirect sunlight</option>
-                <option value="Direct sunlight">Direct sunlight</option>
-                <option value="Filtered sunlight">Filtered sunlight</option>
-              </select>
-            </label>
-          </div> */}
-
           <div className="formGroup">
             <label>
               <span className="labelText">Maintenance Type:</span>
@@ -92,8 +98,7 @@ const PlantRecommendation: React.FC = () => {
             </label>
           </div>
 
-          <button type="submit" className="getRecommendationButton">Get Recommendations</button>
-          
+          <button type="submit" className="getRecommendationButton">{buttonText}</button>
         </form>
 
         {/* Display Error or Plant Information */}
@@ -111,11 +116,11 @@ const PlantRecommendation: React.FC = () => {
               <p><strong>Watering:</strong> {plant.watering_needs}</p>
             </div>
           ) : (
-            !error && <p>No plant found. Please refine your search.</p>
+            !error && <p></p>
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

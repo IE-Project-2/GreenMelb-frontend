@@ -9,13 +9,12 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js'; // Import necessary chart.js components
+} from 'chart.js'; 
 
 import Header from './Header.tsx';
 import Footer from './Footer.tsx';
 import './WastePrediction.css';
 
-// Register necessary components for the chart
 ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const WastePrediction: React.FC = () => {
@@ -26,11 +25,12 @@ const WastePrediction: React.FC = () => {
     large_item_disposal: 'Never',
   });
 
+  const [wasteCategories, setWasteCategories] = useState<{ [key: string]: number } | null>(null);
+  const [showFinalMessage, setShowFinalMessage] = useState(false); // State to show/hide final message
+
   useEffect(() => {
     document.title = 'Waste Prediction - Green Melb';
   }, []);
-
-  const [wasteCategories, setWasteCategories] = useState<{ [key: string]: number } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({
@@ -44,6 +44,7 @@ const WastePrediction: React.FC = () => {
     try {
       const response = await axios.post(`http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/predict/`, formData);
       setWasteCategories(response.data.predicted_waste);
+      setShowFinalMessage(true);  // Show final message when waste is predicted
     } catch (error) {
       console.error('Error fetching prediction:', error);
     }
@@ -163,6 +164,17 @@ const WastePrediction: React.FC = () => {
             <Bar data={chartData} options={chartOptions} height={100} />
             <p className="hover-text">
               Hover on the bars to see the estimated waste for each category per month.
+            </p>
+          </div>
+        )}
+
+        {/* Final message that appears after prediction */}
+        {showFinalMessage && (
+          <div className="final-message">
+            <p>
+              Great! Now you know how to identify waste, where to recycle it, or ways to compost it. 
+              You've also set recycling goals and discovered how much waste an average household produces. 
+              Good luck on your waste management journey towards managing waste. 
             </p>
           </div>
         )}
