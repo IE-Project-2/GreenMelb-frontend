@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Assuming you are using react-router
+import { useNavigate } from 'react-router-dom';
 import './Camera.css';
 import Footer from './Footer.tsx';
 import Header from './Header.tsx';
@@ -10,7 +10,6 @@ interface DetectedItem {
 }
 
 const Camera = () => {
-  const [streamUrl, setStreamUrl] = useState(''); // URL for backend video stream
   const [detectedItems, setDetectedItems] = useState<DetectedItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageUrl, setModalImageUrl] = useState('');
@@ -21,22 +20,15 @@ const Camera = () => {
   const tableRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate(); // For navigation
 
-  // Initialize the backend video feed
-  useEffect(() => {
-    const videoFeedUrl = `http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/videoclassifier/video_feed/`;
-    setStreamUrl(videoFeedUrl);
-  }, []);
-
-  // Initialize user camera using getUserMedia
   useEffect(() => {
     const getUserMedia = async () => {
       try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
         if (videoRef.current) {
-          videoRef.current.srcObject = mediaStream; // Set camera stream to video element
+          videoRef.current.srcObject = mediaStream;
         }
       } catch (error) {
-        console.error("Error accessing camera: ", error);
+        console.error('Error accessing camera: ', error);
         setErrorMessage('Failed to access the camera.');
       }
     };
@@ -44,7 +36,6 @@ const Camera = () => {
     getUserMedia();
 
     return () => {
-      // Stop the camera stream when the component is unmounted
       if (videoRef.current && videoRef.current.srcObject) {
         const stream = videoRef.current.srcObject as MediaStream;
         const tracks = stream.getTracks();
@@ -57,35 +48,52 @@ const Camera = () => {
     document.title = 'Live Classification - Green Melb';
   }, []);
 
-  // Handle adding item to the table after classification
-  const handleAddItem = async () => {
+  // Capture the current frame from the user's video and send it to the backend for classification
+  const captureFrameAndSendToBackend = async () => {
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/videoclassifier/capture_and_classify_frame/`, {
-        method: 'POST',
-      });
+      const canvas = document.createElement('canvas');
+      const videoElement = videoRef.current;
 
-      if (!response.ok) {
-        throw new Error('Failed to capture and classify frame');
-      }
+      if (videoElement) {
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        const context = canvas.getContext('2d');
+        if (context) {
+          context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+          const imageDataUrl = canvas.toDataURL('image/jpeg');
 
-      const data = await response.json();
-      console.log('Backend response:', data); // Log the response to debug
+          const response = await fetch(`http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/videoclassifier/classify_image/`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image: imageDataUrl }),
+          });
 
-      const { classifications } = data;
-      if (classifications && (classifications.recyclable > 0 || classifications.ewaste > 0 || classifications.organic > 0)) {
-        const snapshotUrl = `http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}${data.processed_file_url}`;
+          if (!response.ok) {
+            throw new Error('Failed to classify image');
+          }
 
-        const newItem: DetectedItem = {
-          snapshot: snapshotUrl,
-          category: data.detected_categories,  // Use backend-detected categories
-        };
+          const data = await response.json();
+          console.log('Backend response:', data);
 
-        setDetectedItems((prevItems) => [...prevItems, newItem]);
-        setClassificationDetected(true);  // Valid classification found
-        setErrorMessage(null);  // Clear any previous error messages
-      } else {
-        setClassificationDetected(false);
-        setErrorMessage('No valid waste classification detected. Please try again.');
+          const { classifications } = data;
+          if (classifications && (classifications.recyclable > 0 || classifications.ewaste > 0 || classifications.organic > 0)) {
+            const snapshotUrl = imageDataUrl;
+
+            const newItem: DetectedItem = {
+              snapshot: snapshotUrl,
+              category: data.detected_categories,  // Use backend-detected categories
+            };
+
+            setDetectedItems((prevItems) => [...prevItems, newItem]);
+            setClassificationDetected(true);
+            setErrorMessage(null);
+          } else {
+            setClassificationDetected(false);
+            setErrorMessage('No valid waste classification detected. Please try again.');
+          }
+        }
       }
     } catch (error) {
       console.error('Error adding item:', error);
@@ -93,13 +101,11 @@ const Camera = () => {
     }
   };
 
-  // Function to open the modal with the clicked image
   const openModal = (imageUrl: string) => {
     setModalImageUrl(imageUrl);
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setModalImageUrl('');
@@ -111,12 +117,10 @@ const Camera = () => {
     }
   };
 
-  // Function to dismiss the overlay
   const handleOverlayDismiss = () => {
-    setShowOverlay(false);  // Hide the overlay
+    setShowOverlay(false);
   };
 
-  // Check if "Ewaste" or "recyclable" exists in the detected items
   const hasRecyclableOrEwaste = detectedItems.some(item => item.category === 'Ewaste' || item.category === 'Recyclable');
   const hasOrganic = detectedItems.some(item => item.category === 'Organic');
 
@@ -124,7 +128,6 @@ const Camera = () => {
     <>
       <Header />
       <div className="camera-page">
-        {/* Overlay with instructions */}
         {showOverlay && (
           <div className="overlay">
             <div className="overlay-content">
@@ -135,7 +138,9 @@ const Camera = () => {
                 <li>View the classified items in the table below.</li>
                 <li>You can click on the Snapshot column of the table to expand the image.</li>
               </ul>
-              <button className="understand-button" onClick={handleOverlayDismiss}>I Understand</button>
+              <button className="understand-button" onClick={handleOverlayDismiss}>
+                I Understand
+              </button>
             </div>
           </div>
         )}
@@ -143,28 +148,14 @@ const Camera = () => {
         <div className="camera-container">
           <h1 className="camera-title">Live Waste Classification</h1>
 
-          {/* User's camera stream */}
           <div className="video-wrapper">
             <video ref={videoRef} autoPlay playsInline muted className="live-stream"></video>
           </div>
 
-          {/* Backend video feed */}
-          {streamUrl ? (
-            <img src={streamUrl} alt="Live Waste Classification" className="live-stream-backend" />
-          ) : (
-            <p className="loading-text">Loading live stream...</p>
-          )}
+          {!classificationDetected && <div className="error-message">{errorMessage}</div>}
 
-          {/* Error message if no classification detected */}
-          {!classificationDetected && (
-            <div className="error-message">
-              {errorMessage}
-            </div>
-          )}
-
-          {/* Add item directly */}
           <div className="add-item-section">
-            <button onClick={handleAddItem} className="add-button">Add to Table</button>
+            <button onClick={captureFrameAndSendToBackend} className="add-button">Add to Table</button>
           </div>
 
           {detectedItems.length > 0 && (
@@ -189,12 +180,12 @@ const Camera = () => {
                   {detectedItems.map((item, index) => (
                     <tr key={index}>
                       <td>
-                        <img 
-                          src={item.snapshot} 
-                          alt="Snapshot" 
-                          className="snapshot-img" 
-                          onClick={() => openModal(item.snapshot)}  // Open modal on image click
-                          style={{ cursor: 'pointer' }}  // Make it clear the image is clickable
+                        <img
+                          src={item.snapshot}
+                          alt="Snapshot"
+                          className="snapshot-img"
+                          onClick={() => openModal(item.snapshot)}
+                          style={{ cursor: 'pointer' }}
                         />
                       </td>
                       <td>{item.category}</td>
@@ -205,28 +196,31 @@ const Camera = () => {
             </div>
           )}
 
-          {/* If Ewaste or recyclable exists in the table */}
           {hasRecyclableOrEwaste && (
             <div className="info-section">
               <p>Looks like you have Ewaste or recyclable items. You can find nearby recycling centers.</p>
-              <button className="navigate-button" onClick={() => navigate('/MapPage')}>Find Recycling Centers</button>
+              <button className="navigate-button" onClick={() => navigate('/MapPage')}>
+                Find Recycling Centers
+              </button>
             </div>
           )}
 
-          {/* If organic waste exists in the table */}
           {hasOrganic && (
             <div className="info-section">
               <p>Looks like you have organic waste. Here are some tips for composting.</p>
-              <button className="navigate-button" onClick={() => navigate('/CompostingTips')}>Go to Composting Tips</button>
+              <button className="navigate-button" onClick={() => navigate('/CompostingTips')}>
+                Go to Composting Tips
+              </button>
             </div>
           )}
         </div>
 
-        {/* Modal */}
         {isModalOpen && (
           <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <span className="close-button" onClick={closeModal}>&times;</span>
+              <span className="close-button" onClick={closeModal}>
+                &times;
+              </span>
               <img src={modalImageUrl} alt="Full-size snapshot" className="modal-image" />
             </div>
           </div>
