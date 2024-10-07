@@ -9,14 +9,18 @@
   height: 100vh;
 }
 
+
+
+
 .scrollText {
   font-family: monospace;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight:bolder;
   z-index: 1;
+  position: relative; /* Allows for the 'top' property to take effect */
+  top: -150px; /* Adjust this value to move the text higher */
   
 }
-
 
 .card {
   display:flex;
@@ -496,4 +500,49 @@ height: 90%;
   }
   
 
+  .container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Horizontally center */
+    justify-content: center; /* Vertically center */
+    height: 100vh; /* Full viewport height */
+    text-align: center; /* Center align text */
+    padding-top: 100px; /* Adjust this value to move the content down */
+  }
+  
+  
+  
+  .button-container {
+    display: flex; /* Use flexbox for buttons */
+    justify-content: space-between; /* Justify buttons across the width */
+    width: 100%; /* Full width to allow space between buttons */
+    max-width: 600px; /* Optional: set a max width for the button container */
+  }
+  
+  .button {
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-size: 1.5rem; /* Font size */
+    background-color: blue; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 10px; 
+    transition: background-color 0.3s ease;
+    margin-top: 40px;
+  }
+  
+  .button:hover {
+    background-color: darkblue; /* Darker blue when hovered */
+  }
 
+  .subtext {
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin-bottom: 20px; /* Space between text and buttons */
+    padding-top: 20px;
+  }
+  
+  

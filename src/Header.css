@@ -1,7 +1,7 @@
 /* Header Layout */
 .main-header {
     display: flex;
-    justify-content: flex-start;  /* Align everything to the left */
+    justify-content: space-between;  /* Space between logo and nav links */
     align-items: center;
     background-color: #ffffff;  /* White background */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow for depth */
@@ -17,7 +17,6 @@
 .logo {
     display: flex;
     align-items: center;  /* Vertically align text with the logo */
-    margin-right: 60px;  /* Space between the logo and nav links */
 }
 
 .logo a {
@@ -27,7 +26,7 @@
     text-decoration: none;
     transition: color 0.3s ease;
     display: flex;
-    align-items: right;  /* Ensure the text and logo are aligned */
+    align-items: center;  /* Ensure the text and logo are aligned */
     font-family: 'Courier New', monospace; /* Set font to monospace */
 }
 
@@ -38,14 +37,14 @@
 .logo-image {
     width: 180px;  /* Adjust width as needed */
     height: auto;
-    margin-right: 80px;  /* Space between the logo image and the text */
+    margin-right: 20px;  /* Space between the logo image and the text */
 }
 
 /* Navigation Styling */
 .nav-links {
     list-style: none;
     display: flex;
-    justify-content: flex-start;  /* Align links to the left */
+    justify-content: flex-end;  /* Align links to the right */
     gap: 10px;  /* Space between the navigation links */
     padding-left: 0;  /* Remove any default padding from the list */
     font-family: 'Courier New', monospace; /* Set font to monospace */
@@ -80,6 +79,7 @@
     .nav-links {
         flex-direction: column;
         width: 100%;
+        justify-content: flex-start; /* Align links to the left in mobile view */
     }
 
     .nav-links a {
