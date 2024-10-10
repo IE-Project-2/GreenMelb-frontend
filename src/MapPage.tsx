@@ -7,12 +7,9 @@ import './MapPage.css';  // Import the CSS for styling
 import Header from "./Header.tsx";
 // @ts-ignore
 import Footer from "./Footer.tsx";
-import { useNavigate } from 'react-router-dom';  
-
+import { useNavigate } from 'react-router-dom';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY || '';
-
-
 
 const MapPage: React.FC = () => {
     const [map, setMap] = useState<mapboxgl.Map | null>(null);
@@ -21,6 +18,7 @@ const MapPage: React.FC = () => {
     const [selectedWasteTypes, setSelectedWasteTypes] = useState<string[]>([]);  // Track selected waste types
     const [selectedPostcode, setSelectedPostcode] = useState<string>(''); // Track selected postcode
     const [selectedCentreId, setSelectedCentreId] = useState<number | null>(null); // Track selected centre ID for highlighting
+    const [isLoading, setIsLoading] = useState<boolean>(true);  // Track loading state for backend data
     const rowRefs = useRef<{ [key: number]: HTMLTableRowElement | null }>({}); // Store refs to all table rows
     const navigate = useNavigate(); // For navigation
 
@@ -46,10 +44,10 @@ const MapPage: React.FC = () => {
         return () => mapInstance.remove();  // Cleanup on component unmount
     }, []);
 
-
     useEffect(() => {
         // Fetch centres data when the component mounts
         const fetchCentres = async () => {
+            setIsLoading(true); // Set loading to true when fetching starts
             try {
                 const url = `http://${process.env.REACT_APP_ENDPOINT}:${process.env.REACT_APP_PORT}/api/maps/centres/`;
                 const response = await axios.get(url);
@@ -59,6 +57,8 @@ const MapPage: React.FC = () => {
                 }
             } catch (error) {
                 console.error('Error fetching centres:', error);
+            } finally {
+                setIsLoading(false);  // Set loading to false when data fetching and markers update is done
             }
         };
 
@@ -169,7 +169,13 @@ const MapPage: React.FC = () => {
         <>
             <Header />
 
-            <div className="page-layout">
+            {isLoading && (
+                <div className="loading-overlay">
+                    <div className="loading-spinner"></div>
+                </div>
+            )}
+
+            <div className={`page-layout ${isLoading ? 'hidden' : ''}`}>
                 {/* Main content: map and table */}
                 <div className="main-content">
                     {/* Map container */}
@@ -314,10 +320,8 @@ const MapPage: React.FC = () => {
                     <div className="prevent-waste-container">
                         <p>Let's see how much waste can be prevented</p>
                         <button className="navigate-button" onClick={() => navigate('/PreventWaste')}>Go to Prevent Waste</button>
+                    </div>
                 </div>
-                </div>
-                
-                
             </div>
 
             <Footer />

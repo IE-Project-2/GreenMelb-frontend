@@ -112,7 +112,6 @@ const PlantRecommendation: React.FC = () => {
                 <img src={plant.photo_url} alt={plant.name} className="plantImage" />
               </div>
               <p className="description">{plant.description}</p>
-              <p><strong>Sunlight:</strong> {plant.sunlight_needs}</p>
               <p><strong>Watering:</strong> {plant.watering_needs}</p>
             </div>
           ) : (

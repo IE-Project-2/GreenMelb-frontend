@@ -44,7 +44,7 @@ const GreenMelbLandingPage: React.FC = () => {
   onClick={() => navigateToPage('/Quiz')}
   style={{ zIndex: 4,position: 'relative' }} 
 >
-  Get Started
+  Start Your Journey
 </button>
 
       <CursorAnimation />
